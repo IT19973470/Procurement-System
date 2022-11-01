@@ -1,13 +1,13 @@
 // @ts-nocheck
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-view-purchase-orders',
-  templateUrl: './view-purchase-orders.component.html',
-  styleUrls: ['./view-purchase-orders.component.css']
+  selector: 'app-supplier-orders',
+  templateUrl: './supplier-orders.component.html',
+  styleUrls: ['./supplier-orders.component.css']
 })
-export class ViewPurchaseOrdersComponent implements OnInit {
+export class SupplierOrdersComponent implements OnInit {
 
   orders = [];
   consumption = 0;
@@ -23,7 +23,7 @@ export class ViewPurchaseOrdersComponent implements OnInit {
     value: ''
   };
 
-  constructor() {
+  constructor(private router:Router) {
   }
 
   ngOnInit(): void {
@@ -37,5 +37,8 @@ export class ViewPurchaseOrdersComponent implements OnInit {
 
   }
 
+  viewPO(){
+    this.router.navigate(['/view_supplier_orders'])
+  }
 
 }

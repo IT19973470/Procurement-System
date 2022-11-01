@@ -27,22 +27,13 @@
       <th>Status</th>
       </thead>
       <tbody>
-      <tr (click)="viewPO()">
-        <td>123</td>
-        <td>Kamal</td>
-        <td>4</td>
-        <td>45</td>
-        <td>Completed</td>
-        <!--<td>Incomplete</td>-->
-        <!--<td>Delivered</td>-->
+      <tr (click)="viewPO(order)" *ngFor="let order of orders;let i = index">
+        <td>{{order.id}}</td>
+        <td>{{order.appUser.name}}</td>
+        <td>{{order.purchaseOrderDetailList.length}}</td>
+        <td></td>
+        <td>{{order.status}}</td>
       </tr>
-      <!--<tr *ngFor="let pump of orders;let i = index">-->
-        <!--<td>{{i+1}}</td>-->
-        <!--<td>{{pump.pumpedAtFormatted}}</td>-->
-        <!--<td>{{pump.fuelType.name}}</td>-->
-        <!--<td>{{pump.fuelPumped}}L {{pump.fullTanked?'/ Full':''}}</td>-->
-        <!--<td>{{pump.fuelStation.name}}</td>-->
-      <!--</tr>-->
       </tbody>
     </table>
   </div>

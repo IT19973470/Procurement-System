@@ -11,10 +11,11 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { ContentComponent } from './content/content.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { ViewOrderDetailsComponent } from './content/view-order-details/view-order-details.component';
-import { ViewPurchaseOrdersComponent } from './content/supplier/view-purchase-orders/view-purchase-orders.component';
 import { AddMaterialComponent } from './content/add-material/add-material.component';
-import { ListPurchaseOrdersComponent } from './content/supplier/list-purchase-orders/list-purchase-orders.component';
+import { PurchaseOrderDetailsComponent } from './content/supplier/purchase-order-details/purchase-order-details.component';
+import { SupplierOrderDetailsComponent } from './content/warehouse_manager/supplier-order-details/supplier-order-details.component';
+import { SupplierOrdersComponent } from './content/warehouse_manager/supplier-orders/supplier-orders.component';
+import { PurchaseOrdersComponent } from './content/supplier/purchase-orders/purchase-orders.component';
 const customNotifierOptions: NotifierOptions = {
   position: {
     horizontal: {
@@ -63,10 +64,11 @@ const customNotifierOptions: NotifierOptions = {
     FooterComponent,
     ContentComponent,
     NavbarComponent,
-    ViewOrderDetailsComponent,
-    ViewPurchaseOrdersComponent,
     AddMaterialComponent,
-    ListPurchaseOrdersComponent
+    PurchaseOrderDetailsComponent,
+    SupplierOrderDetailsComponent,
+    SupplierOrdersComponent,
+    PurchaseOrdersComponent
   ],
   imports: [
     BrowserModule,

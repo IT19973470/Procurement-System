@@ -1,0 +1,70 @@
+<app-alert-box *ngIf="alertBox.alert" [alertMsg]="alertBox"></app-alert-box>
+<div class="row" style="margin-top: 75px;margin-left: 0px;margin-right: 0px">
+  <div style="margin-top: 20px;display: flex">
+    <div style="font-weight: bold;color: #b68003;font-size: 21px;width: calc(100% - 250px)">Order Details</div>
+    <div style="width: 250px;display: flex">
+      <input type="text" class="form-control" style="border-radius: 20px" placeholder="Search">
+      <i class="fa fa-search" style="font-size: 20px;padding: 10px 10px 10px 15px"></i>
+    </div>
+  </div>
+  <div>
+    <select class="form-control" style="width: 200px">
+      <option value="">Filter</option>
+      <option value="">Sub Total</option>
+    </select>
+  </div>
+</div>
+
+<div class="row" style="border-top: 1px solid #aeaeae;margin: 10px">
+  <div class="col-12">
+
+    <table class="table" width="100%" style="margin-top: 20px" border="1px solid black">
+      <thead class="thead-dark">
+      <th>Item No</th>
+      <th>Item Name</th>
+      <th>Item Type</th>
+      <th>Unit Price</th>
+      <th>Quantity</th>
+      <th>Total</th>
+      <th>Status</th>
+      </thead>
+      <tbody>
+      <!--<tr>-->
+      <!--<td>123</td>-->
+      <!--<td>ABC</td>-->
+      <!--<td>Drink</td>-->
+      <!--<td><input type="text" value="12"></td>-->
+      <!--<td>5</td>-->
+      <!--<td>60</td>-->
+      <!--<td>Completed</td>-->
+      <!--</tr>-->
+      <tr *ngFor="let orderDetail of orderDetails;let i = index">
+        <td>{{orderDetail.id}}</td>
+        <td>{{orderDetail.itemName}}</td>
+        <td>{{orderDetail.itemType}}</td>
+        <td>{{orderDetail.unitPrice}}</td>
+        <td>{{orderDetail.quantity}}</td>
+        <td>{{orderDetail.unitPrice * orderDetail.quantity}}</td>
+        <td>{{orderDetail.status}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div>
+    <span style="font-weight: bold">Total : </span>
+    <span>12</span>
+  </div>
+
+  <div style="margin-top: 20px">
+    <div>Delivery Note</div>
+    <div>
+      <textarea class="form-control" cols="30" rows="5"></textarea>
+    </div>
+  </div>
+
+  <div>
+    <button class="btn btn-success" style="margin-left: 20px">View Invoice</button>
+  </div>
+
+</div>

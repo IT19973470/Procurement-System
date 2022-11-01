@@ -33,33 +33,43 @@
         <td>123</td>
         <td>ABC</td>
         <td>Drink</td>
-        <td>12</td>
+        <td><input type="text" value="12"></td>
         <td>5</td>
         <td>60</td>
         <td>Completed</td>
       </tr>
       <!--<tr *ngFor="let pump of orders;let i = index">-->
-        <!--<td>{{i+1}}</td>-->
-        <!--<td>{{pump.pumpedAtFormatted}}</td>-->
-        <!--<td>{{pump.fuelType.name}}</td>-->
-        <!--<td>{{pump.fuelPumped}}L {{pump.fullTanked?'/ Full':''}}</td>-->
-        <!--<td>{{pump.fuelStation.name}}</td>-->
+      <!--<td>{{i+1}}</td>-->
+      <!--<td>{{pump.pumpedAtFormatted}}</td>-->
+      <!--<td>{{pump.fuelType.name}}</td>-->
+      <!--<td>{{pump.fuelPumped}}L {{pump.fullTanked?'/ Full':''}}</td>-->
+      <!--<td>{{pump.fuelStation.name}}</td>-->
       <!--</tr>-->
       </tbody>
     </table>
   </div>
-  <!--<div class="col-6">-->
-  <!--<div style="display: flex;justify-content: right;margin-top: 20px">-->
-  <!--<select [(ngModel)]="selectedOrderBy2" class="form-control" style="width: 200px;margin-right: 10px"-->
-  <!--(change)="selectedOrderBy2=$event.target.value">-->
-  <!--<option value="">Order By</option>-->
-  <!--<option value="date">Date</option>-->
-  <!--<option value="pump">Pumped</option>-->
-  <!--<option value="trip">Trip</option>-->
-  <!--<option value="consumption">Consumption</option>-->
-  <!--</select>-->
-  <!--<button class="btn btn-warning" (click)="reOrderConsumes()">Search</button>-->
-  <!--</div>-->
 
-  <!--</div>-->
+  <div>
+    <span style="font-weight: bold">Total : </span>
+    <span>12</span>
+  </div>
+
+  <div style="margin-top: 20px">
+    <div>Delivery Note</div>
+    <div>
+      <textarea class="form-control" cols="30" rows="5"></textarea>
+    </div>
+  </div>
+
+  <div>
+    <span>Rate the supplier</span>
+    <span>
+      <i class="fa fa-star"></i>
+    </span>
+  </div>
+
+  <div>
+    <button class="btn btn-success" style="margin-left: 20px">Finalize Supplier Order</button>
+  </div>
+
 </div>
