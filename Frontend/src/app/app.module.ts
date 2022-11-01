@@ -16,6 +16,8 @@ import { PurchaseOrderDetailsComponent } from './content/supplier/purchase-order
 import { SupplierOrderDetailsComponent } from './content/warehouse_manager/supplier-order-details/supplier-order-details.component';
 import { SupplierOrdersComponent } from './content/warehouse_manager/supplier-orders/supplier-orders.component';
 import { PurchaseOrdersComponent } from './content/supplier/purchase-orders/purchase-orders.component';
+import { InvoiceComponent } from './content/supplier/invoice/invoice.component';
+import { AlertBoxComponent } from './alert-box/alert-box.component';
 const customNotifierOptions: NotifierOptions = {
   position: {
     horizontal: {
@@ -68,7 +70,9 @@ const customNotifierOptions: NotifierOptions = {
     PurchaseOrderDetailsComponent,
     SupplierOrderDetailsComponent,
     SupplierOrdersComponent,
-    PurchaseOrdersComponent
+    PurchaseOrdersComponent,
+    InvoiceComponent,
+    AlertBoxComponent
   ],
   imports: [
     BrowserModule,

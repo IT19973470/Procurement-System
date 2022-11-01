@@ -38,7 +38,7 @@ export class SupplierOrdersComponent implements OnInit {
   }
 
   viewPO(){
-    this.router.navigate(['/view_supplier_orders'])
+    this.router.navigate(['/supplier_order_details'])
   }
 
 }

@@ -1,7 +1,8 @@
 // @ts-nocheck
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {PurchaseOrderService} from "../../../_service/purchase-order.service";
+import {AlertBoxService} from "../../../alert-box/alert-box.service";
 
 @Component({
   selector: 'app-purchase-orders',
@@ -24,7 +25,13 @@ export class PurchaseOrdersComponent implements OnInit {
     value: ''
   };
 
-  constructor(private router: Router, private poService: PurchaseOrderService) {
+  // isModalTableDetails = {
+  //   text: '',
+  //   openTable: false,
+  //   foundLetter: ''
+  // };
+
+  constructor(private router: Router, private poService: PurchaseOrderService, private alertService: AlertBoxService) {
   }
 
   ngOnInit(): void {
@@ -46,9 +53,26 @@ export class PurchaseOrdersComponent implements OnInit {
 
   getPurchaseOrders() {
     this.poService.getPurchaseOrders().subscribe(orders => {
-      console.log(orders)
+      // console.log(orders)
       this.orders = orders
     })
   }
 
+  changeStatus() {
+    this.alertBox.alert = true;
+    this.alertBox.msg = 'Do you want to accept the order?';
+    this.alertService.reply.observers = [];
+    this.alertService.reply.subscribe(reply => {
+      if (reply) {
+        // this.customerS.deleteFuelConsumption(id).subscribe(() => {
+        //   this.getFuelConsumptions()
+        // })
+      }
+      this.alertBox.alert = false;
+    })
+  }
+
+  // isTrueOrFalseDetails(reply) {
+  //   this.isModalTableDetails.openTable = reply;
+  // }
 }

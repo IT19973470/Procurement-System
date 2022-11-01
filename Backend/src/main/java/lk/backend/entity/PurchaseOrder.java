@@ -18,11 +18,14 @@ public class PurchaseOrder {
 
     @Id
     private String id;
+    private String orderReference;
+    private String deliverNote;
     @ManyToOne
     private AppUser appUser;
     @Transient
     private int quantity;
     private String status;
+    private boolean finalized;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "purchaseOrder")
     private Set<PurchaseOrderDetail> purchaseOrderDetails;
@@ -33,6 +36,8 @@ public class PurchaseOrder {
         this.id = purchaseOrder.id;
         this.status = purchaseOrder.status;
         this.quantity = purchaseOrder.quantity;
+        this.orderReference = purchaseOrder.orderReference;
+        this.deliverNote = purchaseOrder.deliverNote;
     }
 
     public PurchaseOrder(PurchaseOrder purchaseOrder, AppUser appUser) {

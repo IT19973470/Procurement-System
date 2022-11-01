@@ -4,11 +4,12 @@ import {PurchaseOrdersComponent} from "./content/supplier/purchase-orders/purcha
 import {PurchaseOrderDetailsComponent} from "./content/supplier/purchase-order-details/purchase-order-details.component";
 import {SupplierOrdersComponent} from "./content/warehouse_manager/supplier-orders/supplier-orders.component";
 import {SupplierOrderDetailsComponent} from "./content/warehouse_manager/supplier-order-details/supplier-order-details.component";
+import {InvoiceComponent} from "./content/supplier/invoice/invoice.component";
 
 const routes: Routes = [
   {
     path: "",
-    redirectTo: "purchase_orders",
+    redirectTo: "supplier_orders",
     pathMatch: "full"
   },
 
@@ -19,6 +20,10 @@ const routes: Routes = [
   {
     path: "purchase_order_details",
     component: PurchaseOrderDetailsComponent
+  },
+  {
+    path: "view_invoice",
+    component: InvoiceComponent
   },
 
   {

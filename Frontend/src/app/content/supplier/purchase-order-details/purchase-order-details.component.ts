@@ -1,6 +1,7 @@
 // @ts-nocheck
 import {Component, OnInit} from '@angular/core';
 import {PurchaseOrderService} from "../../../_service/purchase-order.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-purchase-order-details',
@@ -23,9 +24,10 @@ export class PurchaseOrderDetailsComponent implements OnInit {
     value: ''
   };
 
+  order
   orderDetails = []
 
-  constructor(private poService: PurchaseOrderService) {
+  constructor(private router: Router, private poService: PurchaseOrderService) {
   }
 
   ngOnInit(): void {
@@ -41,6 +43,15 @@ export class PurchaseOrderDetailsComponent implements OnInit {
   }
 
   getPurchaseOrderDetails() {
+    this.order = this.poService.order
     this.orderDetails = this.poService.order.purchaseOrderDetailList
+    for (let orderDetail of this.orderDetails) {
+      orderDetail.r_unitPrice = orderDetail.unitPrice
+      orderDetail.r_quantity = orderDetail.quantity
+    }
+  }
+
+  viewInvoice() {
+    this.router.navigate(['/view_invoice'])
   }
 }
