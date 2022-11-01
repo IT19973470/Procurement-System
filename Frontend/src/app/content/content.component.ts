@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -29,8 +30,8 @@ export class ContentComponent implements OnInit {
     this.isModalTableDetails.openTable = reply;
   }
 
-  // getUser() {
-  //   return JSON.parse(localStorage.getItem('user'))
-  // }
+  getUser() {
+    return JSON.parse(localStorage.getItem('user'))
+  }
 
 }

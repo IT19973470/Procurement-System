@@ -11,6 +11,10 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { ContentComponent } from './content/content.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { ViewOrderDetailsComponent } from './content/view-order-details/view-order-details.component';
+import { ViewPurchaseOrdersComponent } from './content/supplier/view-purchase-orders/view-purchase-orders.component';
+import { AddMaterialComponent } from './content/add-material/add-material.component';
+import { ListPurchaseOrdersComponent } from './content/supplier/list-purchase-orders/list-purchase-orders.component';
 const customNotifierOptions: NotifierOptions = {
   position: {
     horizontal: {
@@ -58,7 +62,11 @@ const customNotifierOptions: NotifierOptions = {
     HeaderComponent,
     FooterComponent,
     ContentComponent,
-    NavbarComponent
+    NavbarComponent,
+    ViewOrderDetailsComponent,
+    ViewPurchaseOrdersComponent,
+    AddMaterialComponent,
+    ListPurchaseOrdersComponent
   ],
   imports: [
     BrowserModule,
