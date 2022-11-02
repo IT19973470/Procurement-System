@@ -13,20 +13,32 @@ export class InvoiceComponent implements OnInit {
 
   order
   orderDetails = []
+  total = 0
 
   constructor(private router: Router, private supplierService: SupplierService) {
   }
 
   ngOnInit(): void {
     this.getPurchaseOrderDetails()
+    this.calcTotal()
   }
 
   getPurchaseOrderDetails() {
     this.order = this.supplierService.order
     this.orderDetails = this.supplierService.order.purchaseOrderDetailList
+    // console.log(this.orderDetails)
     // for (let orderDetail of this.orderDetails) {
-    //   orderDetail.r_unitPrice = orderDetail.unitPrice
-    //   orderDetail.r_quantity = orderDetail.quantity
+    //   orderDetail.soUnitPrice = orderDetail.poUnitPrice
+    //   orderDetail.soQuantity = orderDetail.poQuantity
     // }
+    // console.log(this.order)
+  }
+
+  calcTotal() {
+    this.total = 0
+    for (let orderDetail of this.orderDetails) {
+      this.total += (orderDetail.soUnitPrice * orderDetail.soQuantity)
+    }
+    this.supplierService.order.poTotal = this.total
   }
 }

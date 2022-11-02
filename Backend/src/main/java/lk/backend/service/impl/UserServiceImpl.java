@@ -19,7 +19,9 @@ public class UserServiceImpl implements UserService {
     public AppUser login(AppUser appUser) {
         Optional<AppUser> userOptional = userRepository.login(appUser.getEmail(), appUser.getPassword());
         if (userOptional.isPresent()) {
-            return new AppUser(userOptional.get());
+            AppUser appUserObj = userOptional.get();
+            appUserObj.setIdFormatted(appUser.getFormattedId());
+            return new AppUser(appUserObj);
         }
         return null;
     }

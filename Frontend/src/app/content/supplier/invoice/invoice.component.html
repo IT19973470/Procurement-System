@@ -3,8 +3,9 @@
     <i class="fa fa-arrow-left" style="font-size: 30px" [routerLink]="'/purchase_order_details'"></i>
   </div>
   <div style="margin-top: 20px">
+    <div style="font-weight: bold;color: #b68003;font-size: 21px;width: calc(100% - 250px);margin-bottom: 20px">Invoice</div>
     <span style="font-weight: bold">Buyer : </span>
-    <span>PO{{order.warehouseManager.name}}</span>
+    <span>{{order.warehouseManager.name}}</span>
   </div>
   <div style="margin-top: 20px">
     <span style="font-weight: bold">Purchase Order Reference : </span>
@@ -40,9 +41,9 @@
         <td>{{orderDetail.id}}</td>
         <td>{{orderDetail.itemName}}</td>
         <td>{{orderDetail.itemType}}</td>
-        <td>{{orderDetail.unitPrice | number : '1.2-2'}}</td>
-        <td>{{orderDetail.quantity}}</td>
-        <td>{{(orderDetail.unitPrice * orderDetail.quantity) | number : '1.2-2'}}</td>
+        <td>{{orderDetail.soUnitPrice | number : '1.2-2'}}</td>
+        <td>{{orderDetail.soQuantity}}</td>
+        <td>{{(orderDetail.soUnitPrice * orderDetail.soQuantity) | number : '1.2-2'}}</td>
       </tr>
       </tbody>
     </table>
@@ -50,13 +51,13 @@
 
   <div style="text-align: right;font-size: 20px">
     <span style="font-weight: bold">Total : </span>
-    <span>12</span>
+    <span>{{total | number : '1.2-2'}}</span>
   </div>
 
   <div style="margin-top: 20px">
-    <div>Delivery Note</div>
+    <div style="font-weight: bold">Delivery Note</div>
     <div>
-      <textarea class="form-control" cols="30" rows="5" [(ngModel)]="order.deliverNote" readonly></textarea>
+      <textarea class="form-control" cols="30" rows="5" [(ngModel)]="order.deliverNote"></textarea>
     </div>
   </div>
 

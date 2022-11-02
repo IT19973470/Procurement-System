@@ -21,18 +21,21 @@
 <div class="row" style="border-top: 1px solid #aeaeae;margin: 10px">
   <div class="col-12">
 
-    <div style="margin-top: 10px;text-align: right"><span style="font-weight: bold">O. -</span> Ordered</div>
+    <div style="margin-top: 10px;text-align: right">
+      <span style="font-weight: bold">R. -</span> Requested,
+      <span style="font-weight: bold"> N. -</span> New
+    </div>
     <table class="table" width="100%" border="1px solid black">
       <thead class="thead-dark">
       <th>Item No</th>
       <th>Item Name</th>
       <th>Item Type</th>
       <th>O.Unit Price</th>
-      <th>Unit Price</th>
+      <th>N.Unit Price</th>
       <th>O.Quantity</th>
-      <th>Quantity</th>
+      <th>N.Quantity</th>
       <th>Total</th>
-      <th>Status</th>
+      <th style="text-align: center">Status</th>
       </thead>
       <tbody>
       <tr *ngFor="let orderDetail of orderDetails;let i = index">
@@ -44,7 +47,14 @@
         <td>{{orderDetail.poQuantity}}</td>
         <td>{{orderDetail.soQuantity}}</td>
         <td>{{(orderDetail.soUnitPrice * orderDetail.soQuantity) | number : '1.2-2'}}</td>
-        <td>{{orderDetail.status}}</td>
+        <td style="text-align: center" *ngIf="orderDetail.status==='Complete'"
+            (click)="orderDetail.status='Incomplete'">
+          <i class="fa fa-check"></i>
+        </td>
+        <td style="text-align: center" *ngIf="orderDetail.status==='Incomplete'"
+            (click)="orderDetail.status='Complete'">
+          <i class="fa fa-times"></i>
+        </td>
       </tr>
       <!--<tr *ngFor="let pump of orders;let i = index">-->
       <!--<td>{{i+1}}</td>-->
@@ -57,9 +67,9 @@
     </table>
   </div>
 
-  <div>
+  <div style="text-align: right">
     <span style="font-weight: bold">Total : </span>
-    <span>12</span>
+    <span>{{total | number : '1.2-2'}}</span>
   </div>
 
   <div style="margin-top: 20px">

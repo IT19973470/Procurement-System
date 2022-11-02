@@ -4,11 +4,10 @@ import lk.backend.entity.PurchaseOrder;
 import lk.backend.entity.PurchaseOrderDetail;
 import lk.backend.repository.PurchaseOrderRepository;
 import lk.backend.service.SupplierService;
+import lk.backend.service.factory.OrderFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,22 +17,11 @@ public class SupplierServiceImpl implements SupplierService {
 
     @Autowired
     private PurchaseOrderRepository purchaseOrderRepository;
+    private OrderFactory orderFactory = OrderFactory.getOrderFactory();
 
     @Override
     public List<PurchaseOrder> getPurchaseOrders(String supplierId) {
-        List<PurchaseOrder> purchaseOrders = purchaseOrderRepository.getAllBySupplierId(supplierId);
-        List<PurchaseOrder> purchaseOrderList = new ArrayList<>();
-        for (PurchaseOrder purchaseOrder : purchaseOrders) {
-            PurchaseOrder purchaseOrderObj = new PurchaseOrder(purchaseOrder, purchaseOrder.getWarehouseManager(), null);
-            List<PurchaseOrderDetail> purchaseOrderDetails = new ArrayList<>();
-            for (PurchaseOrderDetail purchaseOrderDetail : purchaseOrder.getPurchaseOrderDetails()) {
-                purchaseOrderObj.setPoTotal(purchaseOrderObj.getPoTotal() + (purchaseOrderDetail.getPoUnitPrice() * purchaseOrderDetail.getPoQuantity()));
-                purchaseOrderDetails.add(new PurchaseOrderDetail(purchaseOrderDetail));
-            }
-            purchaseOrderObj.setPurchaseOrderDetailList(purchaseOrderDetails);
-            purchaseOrderList.add(purchaseOrderObj);
-        }
-        return purchaseOrderList;
+        return orderFactory.getOrderObj("SupplierOrder").getOrders(purchaseOrderRepository, supplierId);
     }
 
     @Override
@@ -58,6 +46,7 @@ public class SupplierServiceImpl implements SupplierService {
                 purchaseOrderDetaiObj.setPurchaseOrder(purchaseOrderObj);
             }
             purchaseOrderObj.setPoFinalized(true);
+            purchaseOrderObj.setIdFormatted(purchaseOrderObj.getFormattedId());
             purchaseOrderRepository.save(purchaseOrderObj);
             return new PurchaseOrder(purchaseOrderObj);
         }

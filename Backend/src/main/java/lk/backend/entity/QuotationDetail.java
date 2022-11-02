@@ -15,7 +15,7 @@ import javax.persistence.Transient;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class PurchaseOrderDetail {
+public class QuotationDetail {
 
     @Id
     private String id;
@@ -31,11 +31,10 @@ public class PurchaseOrderDetail {
     private int soQuantity;
     private String status;
 
-    public PurchaseOrderDetail(PurchaseOrderDetail purchaseOrderDetail) {
+    public QuotationDetail(QuotationDetail purchaseOrderDetail) {
         this.id = purchaseOrderDetail.id;
 //        this.itemName = purchaseOrderDetail.itemName;
 //        this.itemType = purchaseOrderDetail.itemType;
-        this.material = purchaseOrderDetail.material;
         this.poUnitPrice = purchaseOrderDetail.poUnitPrice;
         this.poQuantity = purchaseOrderDetail.poQuantity;
         this.soUnitPrice = purchaseOrderDetail.soUnitPrice;
@@ -43,7 +42,7 @@ public class PurchaseOrderDetail {
         this.status = purchaseOrderDetail.status;
     }
 
-    public PurchaseOrderDetail(PurchaseOrderDetail purchaseOrderDetail, PurchaseOrder purchaseOrder, AppUser warehouseManager, AppUser supplier) {
+    public QuotationDetail(QuotationDetail purchaseOrderDetail, PurchaseOrder purchaseOrder, AppUser warehouseManager, AppUser supplier) {
         this(purchaseOrderDetail);
         if (purchaseOrder != null && warehouseManager != null && supplier != null) {
             this.purchaseOrder = new PurchaseOrder(purchaseOrder, warehouseManager, supplier);

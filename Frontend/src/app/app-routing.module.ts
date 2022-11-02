@@ -5,12 +5,18 @@ import {PurchaseOrderDetailsComponent} from "./content/supplier/purchase-order-d
 import {SupplierOrdersComponent} from "./content/warehouse_manager/supplier-orders/supplier-orders.component";
 import {SupplierOrderDetailsComponent} from "./content/warehouse_manager/supplier-order-details/supplier-order-details.component";
 import {InvoiceComponent} from "./content/supplier/invoice/invoice.component";
+import {EditPurchaseOrderComponent} from "./content/procument_officer/edit-purchase-order/edit-purchase-order.component";
+import {EditPurchaseOrderDetailsComponent} from "./content/procument_officer/edit-purchase-order-details/edit-purchase-order-details.component";
+import {ManageMaterialComponent} from "./content/site_manager/manage-material/manage-material.component";
+import {CreatePrComponent} from "./content/site_manager/create-pr/create-pr.component";
+import {ViewPrComponent} from "./content/site_manager/view-pr/view-pr.component";
 
 const routes: Routes = [
   {
     path: "",
-    redirectTo: "supplier_orders",
+    // redirectTo: "supplier_orders",
     // redirectTo: "purchase_orders",
+    redirectTo: "edit_purchase_orders",
     pathMatch: "full"
   },
 
@@ -34,7 +40,29 @@ const routes: Routes = [
   {
     path: "supplier_order_details",
     component: SupplierOrderDetailsComponent
-  }
+  },
+
+  {
+    path: "edit_purchase_orders",
+    component: EditPurchaseOrderComponent
+  },
+  {
+    path: "edit_purchase_order_details",
+    component: EditPurchaseOrderDetailsComponent
+  },
+
+  {
+    path: "manage_material",
+    component: ManageMaterialComponent
+  },
+  {
+    path: "create_pr",
+    component: CreatePrComponent
+  },
+  {
+    path: "view_pr",
+    component: ViewPrComponent
+  },
 
 ];
 

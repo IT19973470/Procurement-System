@@ -34,4 +34,6 @@ public interface WarehouseService {
 //    Vehicle regenerateQR(String vehicle);
 
     List<PurchaseOrder> getFinalizedSupplierOrders(String warehouseId);
+
+    PurchaseOrder finalizeSupplierOrder(PurchaseOrder purchaseOrder, String id);
 }

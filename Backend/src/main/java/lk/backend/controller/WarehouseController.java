@@ -3,7 +3,10 @@ package lk.backend.controller;
 import lk.backend.entity.PurchaseOrder;
 import lk.backend.service.SupplierService;
 import lk.backend.service.WarehouseService;
+import lk.backend.service.command.FinalizeOrderCommand;
+import lk.backend.service.command.FinalizeSupplierOrder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,6 +18,7 @@ public class WarehouseController {
 
     @Autowired
     private WarehouseService warehouseService;
+    private FinalizeOrderCommand finalizeOrderCommand = new FinalizeOrderCommand();
 
 //    @PostMapping(value = "/addCustomer")
 //    public ResponseEntity addCustomer(@RequestBody Customer customer) {
@@ -27,8 +31,10 @@ public class WarehouseController {
 //    }
 
     @GetMapping(value = "/getFinalizedSupplierOrders/{warehouseId}")
-    public List<PurchaseOrder> getFinalizedSupplierOrders(@PathVariable String warehouseId) {
-        return warehouseService.getFinalizedSupplierOrders(warehouseId);
+    public ResponseEntity getFinalizedSupplierOrders(@RequestBody PurchaseOrder purchaseOrder, @PathVariable String warehouseId) {
+//        return warehouseService.getFinalizedSupplierOrders(warehouseId);
+        finalizeOrderCommand.commandSupplierOrder = new FinalizeSupplierOrder(warehouseService);
+        return ResponseEntity.ok(finalizeOrderCommand.commandSupplierOrder.finalizeOrder(purchaseOrder, warehouseId));
     }
 
 //    @GetMapping(value = "/getPumpedAmounts/{id}")

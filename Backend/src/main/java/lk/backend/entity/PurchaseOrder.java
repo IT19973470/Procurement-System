@@ -1,11 +1,13 @@
 package lk.backend.entity;
 
+import lk.backend.util.IDCreator;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
@@ -14,10 +16,12 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class PurchaseOrder {
+public class PurchaseOrder implements IDCreator {
 
     @Id
     private String id;
+    @Transient
+    private String idFormatted;
     private String orderReference;
     private String deliverNote;
     @ManyToOne
@@ -37,6 +41,13 @@ public class PurchaseOrder {
     private boolean poFinalized;
     private boolean soFinalized;
     private boolean poAccepted;
+    private LocalDate addedAt;
+    @Transient
+    private String addedAtFormatted;
+    private String siteName;
+    private int priority;
+    private String note;
+    private String handlingInstruction;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "purchaseOrder")
     private Set<PurchaseOrderDetail> purchaseOrderDetails;
@@ -54,6 +65,12 @@ public class PurchaseOrder {
         this.orderReference = purchaseOrder.orderReference;
         this.deliverNote = purchaseOrder.deliverNote;
         this.poAccepted = purchaseOrder.poAccepted;
+        this.addedAt = purchaseOrder.addedAt;
+//        this.addedAtFormatted= purchaseOrder.addedAtFormatted;
+        this.siteName = purchaseOrder.siteName;
+        this.priority = purchaseOrder.priority;
+        this.note = purchaseOrder.note;
+        this.handlingInstruction = purchaseOrder.handlingInstruction;
     }
 
     public PurchaseOrder(PurchaseOrder purchaseOrder, AppUser warehouseManager, AppUser supplier) {
@@ -64,5 +81,9 @@ public class PurchaseOrder {
         if (warehouseManager != null) {
             this.warehouseManager = new AppUser(warehouseManager);
         }
+    }
+
+    public String getFormattedId() {
+        return "PO" + id;
     }
 }

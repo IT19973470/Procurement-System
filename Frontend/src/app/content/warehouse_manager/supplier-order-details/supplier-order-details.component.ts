@@ -25,12 +25,14 @@ export class SupplierOrderDetailsComponent implements OnInit {
 
   order
   orderDetails = []
+  total = 0
 
   constructor(private wareHouseService: WarehouseService) {
   }
 
   ngOnInit(): void {
     this.getSupplierOrderDetails()
+    this.calcTotal()
   }
 
   reOrderPumps() {
@@ -48,5 +50,13 @@ export class SupplierOrderDetailsComponent implements OnInit {
     //   orderDetail.r_unitPrice = orderDetail.unitPrice
     //   orderDetail.r_quantity = orderDetail.quantity
     // }
+  }
+
+  calcTotal() {
+    this.total = 0
+    for (let orderDetail of this.orderDetails) {
+      this.total += (orderDetail.soUnitPrice * orderDetail.soQuantity)
+    }
+    // this.wareHouseService.order.poTotal = this.total
   }
 }

@@ -1,20 +1,24 @@
 package lk.backend.entity;
 
+import lk.backend.util.IDCreator;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-public class AppUser {
+public class AppUser implements IDCreator {
 
     @Id
     private String id;
+    @Transient
+    private String idFormatted;
     private String name;
     private String email;
     private String password;
@@ -30,4 +34,7 @@ public class AppUser {
         this.contactNumber = appUser.contactNumber;
     }
 
+    public String getFormattedId() {
+        return "U" + id;
+    }
 }

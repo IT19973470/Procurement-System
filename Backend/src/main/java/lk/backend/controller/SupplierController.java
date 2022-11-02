@@ -2,6 +2,8 @@ package lk.backend.controller;
 
 import lk.backend.entity.PurchaseOrder;
 import lk.backend.service.SupplierService;
+import lk.backend.service.command.FinalizeOrderCommand;
+import lk.backend.service.command.FinalizePurchaseOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,15 +17,12 @@ public class SupplierController {
 
     @Autowired
     private SupplierService supplierService;
+    private FinalizeOrderCommand finalizeOrderCommand = new FinalizeOrderCommand();
 
-//    @PostMapping(value = "/addCustomer")
-//    public ResponseEntity addCustomer(@RequestBody Customer customer) {
-//        return ResponseEntity.ok(supplierService.addCustomer(customer));
-//    }
-//
     @PutMapping(value = "/finalizePurchaseOrder/{id}")
     public ResponseEntity finalizePurchaseOrder(@RequestBody PurchaseOrder purchaseOrder, @PathVariable String id) {
-        return ResponseEntity.ok(supplierService.finalizePurchaseOrder(purchaseOrder, id));
+        finalizeOrderCommand.commandPurchaseOrder = new FinalizePurchaseOrder(supplierService);
+        return ResponseEntity.ok(finalizeOrderCommand.commandPurchaseOrder.finalizeOrder(purchaseOrder, id));
     }
 
     @GetMapping(value = "/getPurchaseOrders/{supplierId}")
