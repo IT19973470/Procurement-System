@@ -1,16 +1,29 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 import {HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
 import {ScrollingModule} from "@angular/cdk/scrolling";
 import {NotifierModule, NotifierOptions} from "angular-notifier";
 import {DatePipe} from "@angular/common";
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
-import { ContentComponent } from './content/content.component';
-import { NavbarComponent } from './navbar/navbar.component';
+import {HeaderComponent} from './header/header.component';
+import {FooterComponent} from './footer/footer.component';
+import {ContentComponent} from './content/content.component';
+import {NavbarComponent} from './navbar/navbar.component';
+import {PurchaseOrderDetailsComponent} from './content/supplier/purchase-order-details/purchase-order-details.component';
+import {SupplierOrderDetailsComponent} from './content/warehouse_manager/supplier-order-details/supplier-order-details.component';
+import {SupplierOrdersComponent} from './content/warehouse_manager/supplier-orders/supplier-orders.component';
+import {PurchaseOrdersComponent} from './content/supplier/purchase-orders/purchase-orders.component';
+import {InvoiceComponent} from './content/supplier/invoice/invoice.component';
+import {AlertBoxComponent} from './alert-box/alert-box.component';
+import {EditPurchaseOrderComponent} from './content/procument_officer/edit-purchase-order/edit-purchase-order.component';
+import {EditPurchaseOrderDetailsComponent} from './content/procument_officer/edit-purchase-order-details/edit-purchase-order-details.component';
+import {SendToSuppliersComponent} from './content/procument_officer/send-to-suppliers/send-to-suppliers.component';
+import {ManageMaterialComponent} from './content/site_manager/manage-material/manage-material.component';
+import { CreatePrComponent } from './content/site_manager/create-pr/create-pr.component';
+import { ViewPrComponent } from './content/site_manager/view-pr/view-pr.component';
+
 const customNotifierOptions: NotifierOptions = {
   position: {
     horizontal: {
@@ -58,7 +71,19 @@ const customNotifierOptions: NotifierOptions = {
     HeaderComponent,
     FooterComponent,
     ContentComponent,
-    NavbarComponent
+    NavbarComponent,
+    PurchaseOrderDetailsComponent,
+    SupplierOrderDetailsComponent,
+    SupplierOrdersComponent,
+    PurchaseOrdersComponent,
+    InvoiceComponent,
+    AlertBoxComponent,
+    EditPurchaseOrderComponent,
+    EditPurchaseOrderDetailsComponent,
+    SendToSuppliersComponent,
+    ManageMaterialComponent,
+    CreatePrComponent,
+    ViewPrComponent
   ],
   imports: [
     BrowserModule,
@@ -66,9 +91,10 @@ const customNotifierOptions: NotifierOptions = {
     HttpClientModule,
     FormsModule,
     ScrollingModule,
-   NotifierModule.withConfig(customNotifierOptions)
+    NotifierModule.withConfig(customNotifierOptions)
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
