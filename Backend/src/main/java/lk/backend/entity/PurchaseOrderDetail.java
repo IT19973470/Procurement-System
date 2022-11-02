@@ -22,23 +22,27 @@ public class PurchaseOrderDetail {
     private PurchaseOrder purchaseOrder;
     private String itemName;
     private String itemType;
-    private double unitPrice;
-    private int quantity;
+    private double poUnitPrice;
+    private int poQuantity;
+    private double soUnitPrice;
+    private int soQuantity;
     private String status;
 
     public PurchaseOrderDetail(PurchaseOrderDetail purchaseOrderDetail) {
         this.id = purchaseOrderDetail.id;
         this.itemName = purchaseOrderDetail.itemName;
         this.itemType = purchaseOrderDetail.itemType;
-        this.unitPrice = purchaseOrderDetail.unitPrice;
-        this.quantity = purchaseOrderDetail.quantity;
+        this.poUnitPrice = purchaseOrderDetail.poUnitPrice;
+        this.poQuantity = purchaseOrderDetail.poQuantity;
+        this.soUnitPrice = purchaseOrderDetail.soUnitPrice;
+        this.soQuantity = purchaseOrderDetail.soQuantity;
         this.status = purchaseOrderDetail.status;
     }
 
-    public PurchaseOrderDetail(PurchaseOrderDetail purchaseOrderDetail, PurchaseOrder purchaseOrder, AppUser appUser) {
+    public PurchaseOrderDetail(PurchaseOrderDetail purchaseOrderDetail, PurchaseOrder purchaseOrder, AppUser warehouseManager, AppUser supplier) {
         this(purchaseOrderDetail);
-        if (purchaseOrder != null && appUser != null) {
-            this.purchaseOrder = new PurchaseOrder(purchaseOrder, appUser);
+        if (purchaseOrder != null && warehouseManager != null && supplier != null) {
+            this.purchaseOrder = new PurchaseOrder(purchaseOrder, warehouseManager, supplier);
         }
     }
 }

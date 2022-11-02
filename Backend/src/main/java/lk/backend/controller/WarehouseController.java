@@ -2,38 +2,33 @@ package lk.backend.controller;
 
 import lk.backend.entity.PurchaseOrder;
 import lk.backend.service.SupplierService;
+import lk.backend.service.WarehouseService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping(value = "procumentary/" + "supplier")
-public class SupplierController {
+@RequestMapping(value = "procumentary/" + "warehouse")
+public class WarehouseController {
 
     @Autowired
-    private SupplierService supplierService;
+    private WarehouseService warehouseService;
 
 //    @PostMapping(value = "/addCustomer")
 //    public ResponseEntity addCustomer(@RequestBody Customer customer) {
 //        return ResponseEntity.ok(supplierService.addCustomer(customer));
 //    }
 //
-    @PutMapping(value = "/finalizePurchaseOrder/{id}")
-    public ResponseEntity finalizePurchaseOrder(@RequestBody PurchaseOrder purchaseOrder, @PathVariable String id) {
-        return ResponseEntity.ok(supplierService.finalizePurchaseOrder(purchaseOrder, id));
-    }
+//    @PutMapping(value = "/updateCustomer/{id}")
+//    public ResponseEntity updateCustomer(@RequestBody Customer customer, @PathVariable String id) {
+//        return ResponseEntity.ok(supplierService.updateCustomer(customer, id));
+//    }
 
-    @GetMapping(value = "/getPurchaseOrders/{supplierId}")
-    public List<PurchaseOrder> getPurchaseOrders(@PathVariable String supplierId) {
-        return supplierService.getPurchaseOrders(supplierId);
-    }
-
-    @GetMapping(value = "/acceptOrder/{orderId}")
-    public boolean acceptOrder(@PathVariable String orderId) {
-        return supplierService.acceptOrder(orderId);
+    @GetMapping(value = "/getFinalizedSupplierOrders/{warehouseId}")
+    public List<PurchaseOrder> getFinalizedSupplierOrders(@PathVariable String warehouseId) {
+        return warehouseService.getFinalizedSupplierOrders(warehouseId);
     }
 
 //    @GetMapping(value = "/getPumpedAmounts/{id}")

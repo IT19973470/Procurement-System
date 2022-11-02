@@ -10,6 +10,7 @@ const routes: Routes = [
   {
     path: "",
     redirectTo: "supplier_orders",
+    // redirectTo: "purchase_orders",
     pathMatch: "full"
   },
 

@@ -1,5 +1,6 @@
 // @ts-nocheck
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {WarehouseService} from "../../../_service/warehouse.service";
 
 @Component({
   selector: 'app-supplier-order-details',
@@ -22,10 +23,14 @@ export class SupplierOrderDetailsComponent implements OnInit {
     value: ''
   };
 
-  constructor() {
+  order
+  orderDetails = []
+
+  constructor(private wareHouseService: WarehouseService) {
   }
 
   ngOnInit(): void {
+    this.getSupplierOrderDetails()
   }
 
   reOrderPumps() {
@@ -36,4 +41,12 @@ export class SupplierOrderDetailsComponent implements OnInit {
 
   }
 
+  getSupplierOrderDetails() {
+    this.order = this.wareHouseService.order
+    this.orderDetails = this.wareHouseService.order.purchaseOrderDetailList
+    // for (let orderDetail of this.orderDetails) {
+    //   orderDetail.r_unitPrice = orderDetail.unitPrice
+    //   orderDetail.r_quantity = orderDetail.quantity
+    // }
+  }
 }

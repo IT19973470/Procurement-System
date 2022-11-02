@@ -21,11 +21,22 @@ public class PurchaseOrder {
     private String orderReference;
     private String deliverNote;
     @ManyToOne
-    private AppUser appUser;
+    private AppUser warehouseManager;
+    @ManyToOne
+    private AppUser supplier;
     @Transient
-    private int quantity;
-    private String status;
-    private boolean finalized;
+    private int poQuantity;
+    @Transient
+    private int soQuantity;
+    @Transient
+    private double poTotal;
+    @Transient
+    private double soTotal;
+    private String poStatus;
+    private String soStatus;
+    private boolean poFinalized;
+    private boolean soFinalized;
+    private boolean poAccepted;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "purchaseOrder")
     private Set<PurchaseOrderDetail> purchaseOrderDetails;
@@ -34,16 +45,24 @@ public class PurchaseOrder {
 
     public PurchaseOrder(PurchaseOrder purchaseOrder) {
         this.id = purchaseOrder.id;
-        this.status = purchaseOrder.status;
-        this.quantity = purchaseOrder.quantity;
+        this.poStatus = purchaseOrder.poStatus;
+        this.soStatus = purchaseOrder.soStatus;
+        this.poQuantity = purchaseOrder.poQuantity;
+        this.soQuantity = purchaseOrder.soQuantity;
+        this.poFinalized = purchaseOrder.poFinalized;
+        this.soFinalized = purchaseOrder.soFinalized;
         this.orderReference = purchaseOrder.orderReference;
         this.deliverNote = purchaseOrder.deliverNote;
+        this.poAccepted = purchaseOrder.poAccepted;
     }
 
-    public PurchaseOrder(PurchaseOrder purchaseOrder, AppUser appUser) {
+    public PurchaseOrder(PurchaseOrder purchaseOrder, AppUser warehouseManager, AppUser supplier) {
         this(purchaseOrder);
-        if (appUser != null) {
-            this.appUser = new AppUser(appUser);
+        if (supplier != null) {
+            this.supplier = new AppUser(supplier);
+        }
+        if (warehouseManager != null) {
+            this.warehouseManager = new AppUser(warehouseManager);
         }
     }
 }

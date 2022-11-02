@@ -1,6 +1,7 @@
 // @ts-nocheck
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
+import {WarehouseService} from "../../../_service/warehouse.service";
 
 @Component({
   selector: 'app-supplier-orders',
@@ -23,10 +24,11 @@ export class SupplierOrdersComponent implements OnInit {
     value: ''
   };
 
-  constructor(private router:Router) {
+  constructor(private router: Router, private wareHouseService: WarehouseService) {
   }
 
   ngOnInit(): void {
+    this.getFinalizedSupplierOrders()
   }
 
   reOrderPumps() {
@@ -37,8 +39,15 @@ export class SupplierOrdersComponent implements OnInit {
 
   }
 
-  viewPO(){
+  viewSO(order) {
+    this.wareHouseService.order = order
     this.router.navigate(['/supplier_order_details'])
   }
 
+  getFinalizedSupplierOrders() {
+    this.wareHouseService.getFinalizedSupplierOrders().subscribe(orders => {
+      console.log(orders)
+      this.orders = orders
+    })
+  }
 }

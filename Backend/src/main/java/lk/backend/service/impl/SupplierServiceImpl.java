@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -20,17 +21,46 @@ public class SupplierServiceImpl implements SupplierService {
 
     @Override
     public List<PurchaseOrder> getPurchaseOrders(String supplierId) {
-        List<PurchaseOrder> purchaseOrders = purchaseOrderRepository.getAllByAppUserId(supplierId);
+        List<PurchaseOrder> purchaseOrders = purchaseOrderRepository.getAllBySupplierId(supplierId);
         List<PurchaseOrder> purchaseOrderList = new ArrayList<>();
         for (PurchaseOrder purchaseOrder : purchaseOrders) {
-            PurchaseOrder purchaseOrderObj = new PurchaseOrder(purchaseOrder, purchaseOrder.getAppUser());
+            PurchaseOrder purchaseOrderObj = new PurchaseOrder(purchaseOrder, purchaseOrder.getWarehouseManager(), null);
             List<PurchaseOrderDetail> purchaseOrderDetails = new ArrayList<>();
             for (PurchaseOrderDetail purchaseOrderDetail : purchaseOrder.getPurchaseOrderDetails()) {
+                purchaseOrderObj.setPoTotal(purchaseOrderObj.getPoTotal() + (purchaseOrderDetail.getPoUnitPrice() * purchaseOrderDetail.getPoQuantity()));
                 purchaseOrderDetails.add(new PurchaseOrderDetail(purchaseOrderDetail));
             }
             purchaseOrderObj.setPurchaseOrderDetailList(purchaseOrderDetails);
             purchaseOrderList.add(purchaseOrderObj);
         }
         return purchaseOrderList;
+    }
+
+    @Override
+    public boolean acceptOrder(String orderId) {
+        Optional<PurchaseOrder> orderOptional = purchaseOrderRepository.findById(orderId);
+        if (orderOptional.isPresent()) {
+            PurchaseOrder purchaseOrder = orderOptional.get();
+            purchaseOrder.setPoAccepted(true);
+            purchaseOrderRepository.save(purchaseOrder);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public PurchaseOrder finalizePurchaseOrder(PurchaseOrder purchaseOrder, String id) {
+        Optional<PurchaseOrder> orderOptional = purchaseOrderRepository.findById(id);
+        if (orderOptional.isPresent()) {
+            PurchaseOrder purchaseOrderObj = orderOptional.get();
+            purchaseOrderObj.setPurchaseOrderDetails(purchaseOrder.getPurchaseOrderDetails());
+            for (PurchaseOrderDetail purchaseOrderDetaiObj : purchaseOrderObj.getPurchaseOrderDetails()) {
+                purchaseOrderDetaiObj.setPurchaseOrder(purchaseOrderObj);
+            }
+            purchaseOrderObj.setPoFinalized(true);
+            purchaseOrderRepository.save(purchaseOrderObj);
+            return new PurchaseOrder(purchaseOrderObj);
+        }
+        return null;
     }
 }

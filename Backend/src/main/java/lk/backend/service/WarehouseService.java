@@ -4,7 +4,7 @@ import lk.backend.entity.PurchaseOrder;
 
 import java.util.List;
 
-public interface SupplierService {
+public interface WarehouseService {
 //    Customer addCustomer(Customer customer);
 //
 //    Customer getCustomer(String email, String contactNumber);
@@ -33,9 +33,5 @@ public interface SupplierService {
 //
 //    Vehicle regenerateQR(String vehicle);
 
-    List<PurchaseOrder> getPurchaseOrders(String supplierId);
-
-    boolean acceptOrder(String orderId);
-
-    PurchaseOrder finalizePurchaseOrder(PurchaseOrder purchaseOrder, String id);
+    List<PurchaseOrder> getFinalizedSupplierOrders(String warehouseId);
 }

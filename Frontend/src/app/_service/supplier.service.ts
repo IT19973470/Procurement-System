@@ -7,7 +7,7 @@ import {environment} from "../../environments/environment";
 @Injectable({
   providedIn: 'root'
 })
-export class PurchaseOrderService {
+export class SupplierService {
 
   order
 
@@ -18,9 +18,14 @@ export class PurchaseOrderService {
   //   return this.http.post<any>(environment.backend_url + '/customer/addCustomer', customer);
   // }
   //
-  // updateCustomer(customer): Observable<any> {
-  //   return this.http.put<any>(environment.backend_url + '/customer/updateCustomer/' + customer.nic, customer);
-  // }
+  finalizePurchaseOrder(order): Observable<any> {
+    return this.http.put<any>(environment.backend_url + '/supplier/finalizePurchaseOrder/' + order.id, order);
+  }
+
+  acceptOrder(orderId) {
+    return this.http.get<any>(environment.backend_url + '/supplier/acceptOrder/' + orderId);
+  }
+
   //
   // deleteCustomer(id): Observable<any> {
   //   return this.http.delete<any>(environment.backend_url + '/customer/deleteCustomer/' + id);
@@ -32,5 +37,16 @@ export class PurchaseOrderService {
 
   getPurchaseOrders(): Observable<any> {
     return this.http.get<any>(environment.backend_url + '/supplier/getPurchaseOrders/' + JSON.parse(localStorage.getItem('user')).id);
+  }
+
+  getFinalizedPurchaseOrders(): Observable<any> {
+    return this.http.get<any>(environment.backend_url + '/supplier/getFinalizedPurchaseOrders/' + JSON.parse(localStorage.getItem('user')).id);
+  }
+
+  newPurchaseOrder() {
+    return {
+      accepted: false,
+      finalized: false
+    }
   }
 }

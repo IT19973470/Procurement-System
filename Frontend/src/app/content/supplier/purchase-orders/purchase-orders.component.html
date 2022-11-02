@@ -29,11 +29,11 @@
       </thead>
       <tbody>
       <tr *ngFor="let order of orders;let i = index">
-        <td>{{order.id}}</td>
-        <td>{{order.appUser.name}}</td>
+        <td>PO{{order.id}}</td>
+        <td>{{order.warehouseManager.name}}</td>
         <td>{{order.purchaseOrderDetailList.length}}</td>
-        <td></td>
-        <td (click)="changeStatus()">{{order.status}}</td>
+        <td>{{order.poTotal | number : '1.2-2'}}</td>
+        <td>{{order.poAccepted?order.poFinalized?'Finalized':'Accepted':'Pending'}}</td>
         <td style="text-align: center">
           <i class="fa fa-arrow-right" (click)="viewPO(order)"></i></td>
       </tr>
@@ -44,23 +44,23 @@
 </div>
 
 <!--<div class="modalTable" *ngIf="isModalTableDetails.openTable">-->
-  <!--<div (click)="isTrueOrFalseDetails(false)"></div>-->
-  <!--<div>-->
-    <!--<div class="selectChild" id="imageActivitySize"-->
-         <!--style="max-height: calc(100vh - 60px);overflow-y: hidden;margin-left: 10px;margin-right: 10px;margin-top: 300px;">-->
-      <!--<div style="position: absolute;z-index: 99;right: 10px;top: 10px;">-->
-        <!--<i class="fas fa-times" style="cursor: pointer" (click)="isTrueOrFalseDetails(false)"></i>-->
-      <!--</div>-->
+<!--<div (click)="isTrueOrFalseDetails(false)"></div>-->
+<!--<div>-->
+<!--<div class="selectChild" id="imageActivitySize"-->
+<!--style="max-height: calc(100vh - 60px);overflow-y: hidden;margin-left: 10px;margin-right: 10px;margin-top: 300px;">-->
+<!--<div style="position: absolute;z-index: 99;right: 10px;top: 10px;">-->
+<!--<i class="fas fa-times" style="cursor: pointer" (click)="isTrueOrFalseDetails(false)"></i>-->
+<!--</div>-->
 
-      <!--<div>-->
-        <!--Change the-->
-        <!--&lt;!&ndash;<div style="position: relative;display: flex;justify-content: center;">&ndash;&gt;-->
+<!--<div>-->
+<!--Change the-->
+<!--&lt;!&ndash;<div style="position: relative;display: flex;justify-content: center;">&ndash;&gt;-->
 
-          <!--&lt;!&ndash;<div style="color: green;font-weight: bold;width: 1200px;font-size: 40px;text-align: center">{{reply.msg}}&ndash;&gt;-->
-          <!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--&lt;!&ndash;<div style="color: green;font-weight: bold;width: 1200px;font-size: 40px;text-align: center">{{reply.msg}}&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
 
-        <!--&lt;!&ndash;</div>&ndash;&gt;-->
-      <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
 <!--</div>-->

@@ -2,6 +2,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {PurchaseOrderService} from "../../../_service/purchase-order.service";
+import {SupplierService} from "../../../_service/supplier.service";
 
 @Component({
   selector: 'app-invoice',
@@ -13,7 +14,7 @@ export class InvoiceComponent implements OnInit {
   order
   orderDetails = []
 
-  constructor(private router: Router, private poService: PurchaseOrderService) {
+  constructor(private router: Router, private supplierService: SupplierService) {
   }
 
   ngOnInit(): void {
@@ -21,11 +22,11 @@ export class InvoiceComponent implements OnInit {
   }
 
   getPurchaseOrderDetails() {
-    this.order = this.poService.order
-    this.orderDetails = this.poService.order.purchaseOrderDetailList
-    for (let orderDetail of this.orderDetails) {
-      orderDetail.r_unitPrice = orderDetail.unitPrice
-      orderDetail.r_quantity = orderDetail.quantity
-    }
+    this.order = this.supplierService.order
+    this.orderDetails = this.supplierService.order.purchaseOrderDetailList
+    // for (let orderDetail of this.orderDetails) {
+    //   orderDetail.r_unitPrice = orderDetail.unitPrice
+    //   orderDetail.r_quantity = orderDetail.quantity
+    // }
   }
 }

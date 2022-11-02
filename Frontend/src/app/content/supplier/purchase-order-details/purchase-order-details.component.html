@@ -1,5 +1,8 @@
 <app-alert-box *ngIf="alertBox.alert" [alertMsg]="alertBox"></app-alert-box>
 <div class="row" style="margin-top: 75px;margin-left: 0px;margin-right: 0px">
+  <div style="margin-top: 20px">
+    <i class="fa fa-arrow-left" style="font-size: 30px" [routerLink]="'/purchase_orders'"></i>
+  </div>
   <div style="margin-top: 20px;display: flex">
     <div style="font-weight: bold;color: #b68003;font-size: 21px;width: calc(100% - 250px)">Order Details</div>
     <div style="width: 250px;display: flex">
@@ -20,19 +23,27 @@
     <span style="font-weight: bold">Purchase Order Reference : </span>
     <span>PO{{order.id}}</span>
   </div>
+  <div>
+    <button class="btn btn-success" style="margin-top: 20px" [disabled]="order.poAccepted" (click)="acceptOrder()">
+      Accept Order
+    </button>
+  </div>
 
   <div class="col-12">
 
-    <div style="margin-top: 10px;text-align: right"><span style="font-weight: bold">R. -</span> Requested</div>
+    <div style="margin-top: 10px;text-align: right">
+      <span style="font-weight: bold">R. -</span> Requested,
+      <span style="font-weight: bold"> N. -</span> New
+    </div>
     <table class="table" width="100%" border="1px solid black">
       <thead class="thead-dark">
       <th>Item No</th>
       <th>Item Name</th>
       <th>Item Type</th>
       <th>R.Unit Price</th>
-      <th>Unit Price</th>
+      <th>N.Unit Price</th>
       <th>R.Quantity</th>
-      <th>Quantity</th>
+      <th>N.Quantity</th>
       <th>Total</th>
       <th>Status</th>
       </thead>
@@ -50,16 +61,25 @@
         <td>{{orderDetail.id}}</td>
         <td>{{orderDetail.itemName}}</td>
         <td>{{orderDetail.itemType}}</td>
-        <td>{{orderDetail.r_unitPrice}}</td>
+        <td>{{orderDetail.poUnitPrice | number : '1.2-2'}}</td>
         <td>
-          <input type="text" [(ngModel)]="orderDetail.unitPrice">
+          <input [readonly]="!order.poAccepted" type="number" [(ngModel)]="orderDetail.soUnitPrice"
+                 (change)="calcTotal()">
         </td>
-        <td>{{orderDetail.r_quantity}}</td>
+        <td>{{orderDetail.poQuantity}}</td>
         <td>
-          <input type="text" [(ngModel)]="orderDetail.quantity">
+          <input [readonly]="!order.poAccepted" type="number" [(ngModel)]="orderDetail.soQuantity"
+                 (change)="calcTotal()">
         </td>
-        <td>{{orderDetail.unitPrice * orderDetail.quantity}}</td>
-        <td>{{orderDetail.status}}</td>
+        <td>{{(orderDetail.soUnitPrice * orderDetail.soQuantity) | number : '1.2-2'}}</td>
+        <td style="text-align: center" *ngIf="orderDetail.status==='Complete'"
+            (click)="orderDetail.status='Incomplete'">
+          <i class="fa fa-check"></i>
+        </td>
+        <td style="text-align: center" *ngIf="orderDetail.status==='Incomplete'"
+            (click)="orderDetail.status='Complete'">
+          <i class="fa fa-times"></i>
+        </td>
       </tr>
       </tbody>
     </table>
@@ -67,12 +87,18 @@
 
   <div style="text-align: right;font-size: 20px">
     <span style="font-weight: bold">Total : </span>
-    <span>12</span>
+    <span>{{total | number : '1.2-2'}}</span>
   </div>
 
   <div style="margin-top: 20px;text-align: right">
-    <button class="btn btn-warning" style="margin-left: 20px" [disabled]="order.finalized">Finalize Purchase Order</button>
-    <button class="btn btn-success" style="margin-left: 20px" (click)="viewInvoice()" [disabled]="!order.finalized">View Invoice</button>
+    <button class="btn btn-warning" style="margin-left: 20px" [disabled]="!(order.poAccepted && !order.poFinalized)"
+            (click)="finalizeOrder()">
+      Finalize Purchase Order
+    </button>
+    <button class="btn btn-success" style="margin-left: 20px" (click)="viewInvoice()" [disabled]="!order.poFinalized">
+      View
+      Invoice
+    </button>
   </div>
 
 </div>
