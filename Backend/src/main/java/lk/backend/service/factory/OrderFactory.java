@@ -1,7 +1,5 @@
 package lk.backend.service.factory;
 
-import lk.backend.service.OrderService;
-
 public class OrderFactory {
 
     private static OrderFactory orderFactory;
