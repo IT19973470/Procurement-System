@@ -1,5 +1,6 @@
 package lk.backend.entity;
 
+import lk.backend.util.IDCreator;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,7 +16,7 @@ import javax.persistence.Transient;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class PurchaseOrderDetail {
+public class PurchaseOrderDetail implements IDCreator {
 
     @Id
     private String id;
@@ -48,5 +49,9 @@ public class PurchaseOrderDetail {
         if (purchaseOrder != null && warehouseManager != null && supplier != null) {
             this.purchaseOrder = new PurchaseOrder(purchaseOrder, warehouseManager, supplier);
         }
+    }
+
+    public String getFormattedId() {
+        return "OD" + id;
     }
 }

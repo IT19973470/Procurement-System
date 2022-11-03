@@ -3,9 +3,6 @@ package lk.backend.service.factory;
 import lk.backend.entity.PurchaseOrder;
 import lk.backend.entity.PurchaseOrderDetail;
 import lk.backend.repository.PurchaseOrderRepository;
-import lk.backend.service.OrderService;
-import lk.backend.service.impl.SupplierServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

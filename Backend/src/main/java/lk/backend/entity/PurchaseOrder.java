@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Set;
 
@@ -85,5 +86,47 @@ public class PurchaseOrder implements IDCreator {
 
     public String getFormattedId() {
         return "PO" + id;
+    }
+
+    public int getSOItemQuantity() {
+        int total = 0;
+        for (PurchaseOrderDetail purchaseOrderDetail : purchaseOrderDetails) {
+            total += purchaseOrderDetail.getSoQuantity();
+        }
+        return total;
+    }
+
+    public int getPOItemQuantity() {
+        int total = 0;
+        for (PurchaseOrderDetail purchaseOrderDetail : purchaseOrderDetails) {
+            total += purchaseOrderDetail.getPoQuantity();
+        }
+        return total;
+    }
+
+    public double getSOItemTotalAmount() {
+        double total = 0;
+        for (PurchaseOrderDetail purchaseOrderDetail : purchaseOrderDetails) {
+            total += (purchaseOrderDetail.getSoQuantity() * purchaseOrderDetail.getSoUnitPrice());
+        }
+        return total;
+    }
+
+    public double getPOItemTotalAmount() {
+        double total = 0;
+        for (PurchaseOrderDetail purchaseOrderDetail : purchaseOrderDetails) {
+            total += (purchaseOrderDetail.getPoQuantity() * purchaseOrderDetail.getPoUnitPrice());
+        }
+        return total;
+    }
+
+    public String getFormattedDate() {
+        return addedAt.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    }
+
+    public void poDetailsToPoMapper() {
+        for (PurchaseOrderDetail purchaseOrderDetail : purchaseOrderDetails) {
+            purchaseOrderDetail.setPurchaseOrder(this);
+        }
     }
 }

@@ -1,4 +1,4 @@
-package lk.backend.service;
+package lk.backend.service.factory;
 
 import lk.backend.entity.PurchaseOrder;
 import lk.backend.repository.PurchaseOrderRepository;
