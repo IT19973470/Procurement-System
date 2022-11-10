@@ -49,7 +49,6 @@ export class ViewQuotationDetailsPoComponent implements OnInit {
 
   ngOnInit(): void {
     this.getSupplierOrderDetails()
-    this.calcTotal()
   }
 
   reOrderPumps() {
@@ -65,6 +64,7 @@ export class ViewQuotationDetailsPoComponent implements OnInit {
     this.supplier = this.procumentOfficerService.supplier
     this.procumentOfficerService.quotationDetails(this.order.id, this.supplier.id).subscribe(orderDetails => {
       this.orderDetails = orderDetails
+      this.calcTotal()
     })
     // for (let orderDetail of this.orderDetails) {
     //   orderDetail.r_unitPrice = orderDetail.unitPrice
@@ -75,7 +75,7 @@ export class ViewQuotationDetailsPoComponent implements OnInit {
   calcTotal() {
     this.total = 0
     for (let orderDetail of this.orderDetails) {
-      this.total += (orderDetail.poUnitPrice * orderDetail.poQuantity)
+      this.total += (orderDetail.soUnitPrice * orderDetail.soQuantity)
     }
     // this.wareHouseService.order.poTotal = this.total
   }

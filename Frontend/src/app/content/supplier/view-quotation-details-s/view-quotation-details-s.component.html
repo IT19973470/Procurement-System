@@ -58,13 +58,13 @@
         <td>{{orderDetail.material.itemType}}</td>
         <td>{{orderDetail.poUnitPrice | number : '1.2-2'}}</td>
         <td>
-          <input [readonly]="!order.poAccepted" type="number" [(ngModel)]="orderDetail.soUnitPrice"
+          <input type="number" [(ngModel)]="orderDetail.soUnitPrice"
                  (change)="calcTotal()">
         </td>
         <!--<td>{{orderDetail.soUnitPrice}}</td>-->
         <td>{{orderDetail.poQuantity}}</td>
         <td>
-          <input [readonly]="!order.poAccepted" type="number" [(ngModel)]="orderDetail.soQuantity"
+          <input type="number" [(ngModel)]="orderDetail.soQuantity"
                  (change)="calcTotal()">
         </td>
         <!--<td>{{orderDetail.soQuantity}}</td>-->
