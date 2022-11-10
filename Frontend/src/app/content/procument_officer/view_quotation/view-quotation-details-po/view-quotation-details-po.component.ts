@@ -124,10 +124,10 @@ export class ViewQuotationDetailsPoComponent implements OnInit {
     })
   }
 
-  approvePR() {
+  finalizeSupplier() {
     this.order.purchaseOrderDetails = this.orderDetails
-    this.procumentOfficerService.approveOrder(this.order.id).subscribe(() => {
-      this.router.navigate(['/edit_purchase_orders'])
+    this.procumentOfficerService.finalizeSupplier(this.order.id, this.supplier.id).subscribe(() => {
+      this.router.navigate(['/view_quotations_po'])
     })
   }
 

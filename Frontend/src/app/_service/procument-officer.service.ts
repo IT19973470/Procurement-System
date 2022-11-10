@@ -44,6 +44,10 @@ export class ProcumentOfficerService {
     return this.http.get<any>(environment.backend_url + '/procument_officer/quotationDetails/' + poId + '/' + supplierId);
   }
 
+  finalizeSupplier(poId, supplierId) {
+    return this.http.get<any>(environment.backend_url + '/procument_officer/finalizeSupplier/' + poId + '/' + supplierId);
+  }
+
   newItem() {
     return {
       id: '',

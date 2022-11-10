@@ -23,4 +23,6 @@ public interface ProcumentOfficerService {
     List<AppUser> quotationSuppliers(String poId);
 
     List<PurchaseOrderDetail> quotationDetails(String poId, String supplierId);
+
+    boolean finalizeSupplier(String poId, String supplierId);
 }

@@ -115,4 +115,24 @@ public class ProcumentOfficerServiceImpl implements ProcumentOfficerService {
         }
         return purchaseOrderDetails;
     }
+
+    @Override
+    public boolean finalizeSupplier(String poId, String supplierId) {
+        Optional<PurchaseOrder> orderOptional = purchaseOrderRepository.findById(poId);
+        Quotation quotation = quotationRepository.getAllByPurchaseOrderIdAndSupplierId(poId, supplierId);
+        if (orderOptional.isPresent()) {
+            PurchaseOrder purchaseOrder = orderOptional.get();
+            purchaseOrder.setSupplier(userRepository.findById(supplierId).get());
+            for (PurchaseOrderDetail purchaseOrderDetail : purchaseOrder.getPurchaseOrderDetails()) {
+                for (QuotationDetail quotationDetail : quotation.getQuotationDetails()) {
+                    if (quotationDetail.getPurchaseOrderDetail().getId().equals(purchaseOrderDetail.getId())) {
+                        purchaseOrderDetail.setSoUnitPrice(quotationDetail.getSoUnitPrice());
+                        purchaseOrderDetail.setSoQuantity(quotationDetail.getSoQuantity());
+                    }
+                }
+            }
+            purchaseOrderRepository.save(purchaseOrder);
+        }
+        return true;
+    }
 }

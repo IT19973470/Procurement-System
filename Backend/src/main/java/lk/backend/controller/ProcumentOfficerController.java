@@ -59,4 +59,9 @@ public class ProcumentOfficerController {
     public ResponseEntity quotationDetails(@PathVariable String poId, @PathVariable String supplierId) {
         return ResponseEntity.ok(procumentOfficerService.quotationDetails(poId, supplierId));
     }
+
+    @GetMapping(value = "/finalizeSupplier/{poId}/{supplierId}")
+    public ResponseEntity finalizeSupplier(@PathVariable String poId, @PathVariable String supplierId) {
+        return ResponseEntity.ok(procumentOfficerService.finalizeSupplier(poId, supplierId));
+    }
 }
