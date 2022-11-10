@@ -22,30 +22,27 @@ public class QuotationDetail {
     @Transient
     private String idFormatted;
     @ManyToOne
-    private PurchaseOrder purchaseOrder;
+    private Quotation quotation;
     @ManyToOne
-    private Material material;
-    private double poUnitPrice;
-    private int poQuantity;
+    private PurchaseOrderDetail purchaseOrderDetail;
     private double soUnitPrice;
     private int soQuantity;
-    private String status;
 
     public QuotationDetail(QuotationDetail purchaseOrderDetail) {
         this.id = purchaseOrderDetail.id;
 //        this.itemName = purchaseOrderDetail.itemName;
 //        this.itemType = purchaseOrderDetail.itemType;
-        this.poUnitPrice = purchaseOrderDetail.poUnitPrice;
-        this.poQuantity = purchaseOrderDetail.poQuantity;
+//        this.poUnitPrice = purchaseOrderDetail.poUnitPrice;
+//        this.poQuantity = purchaseOrderDetail.poQuantity;
         this.soUnitPrice = purchaseOrderDetail.soUnitPrice;
         this.soQuantity = purchaseOrderDetail.soQuantity;
-        this.status = purchaseOrderDetail.status;
+//        this.status = purchaseOrderDetail.status;
     }
 
-    public QuotationDetail(QuotationDetail purchaseOrderDetail, PurchaseOrder purchaseOrder, AppUser warehouseManager, AppUser supplier) {
-        this(purchaseOrderDetail);
-        if (purchaseOrder != null && warehouseManager != null && supplier != null) {
-            this.purchaseOrder = new PurchaseOrder(purchaseOrder, warehouseManager, supplier);
-        }
-    }
+//    public QuotationDetail(QuotationDetail purchaseOrderDetail, PurchaseOrder purchaseOrder, AppUser warehouseManager, AppUser supplier) {
+//        this(purchaseOrderDetail);
+//        if (purchaseOrder != null && warehouseManager != null && supplier != null) {
+//            this.purchaseOrder = new PurchaseOrder(purchaseOrder, warehouseManager, supplier);
+//        }
+//    }
 }

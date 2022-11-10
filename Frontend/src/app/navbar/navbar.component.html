@@ -5,65 +5,37 @@
         <i class='bx bx-layer nav_logo-icon'></i>
         <span class="nav_logo-name">BBBootstrap</span>
       </a>
-      <div class="nav_list" *ngIf="userType==='customer'">
-        <a class="nav_link" [routerLink]="'/my_profile'"
+      <div class="nav_list" *ngIf="userType==='procument_officer'">
+        <a class="nav_link" [routerLink]="'/edit_purchase_orders'"
            #my_profile="routerLinkActive"
            routerLinkActive
            [ngClass]="my_profile.isActive?'active':''">
           <i class='bx bx-user nav_icon'></i>
-          <span class="nav_name">My Profile</span>
+          <span class="nav_name">Purchase Orders</span>
         </a>
-        <a class="nav_link" [routerLink]="'/fuel_consumption_customer'"
+        <a class="nav_link" [routerLink]="'/view_quotations_po'"
            #fuel_consumption_customer="routerLinkActive"
            routerLinkActive
            [ngClass]="fuel_consumption_customer.isActive?'active':''">
           <i class='bx bx-tachometer nav_icon'></i>
-          <span class="nav_name">Fuel Consumption</span>
-        </a>
-        <a class="nav_link" [routerLink]="'/fuel_availability_customer'"
-           #fuel_availability_customer="routerLinkActive"
-           routerLinkActive
-           [ngClass]="fuel_availability_customer.isActive?'active':''">
-          <i class='bx bx-gas-pump nav_icon'></i>
-          <span class="nav_name">Fuel Availability</span>
-        </a>
-        <a class="nav_link" [routerLink]="'/fuel_report_customer'"
-           #fuel_report_customer="routerLinkActive"
-           routerLinkActive
-           [ngClass]="fuel_report_customer.isActive?'active':''">
-          <i class="fa-solid fa-chart-simple nav_icon"></i>
-          <span class="nav_name">Customer Reports</span>
+          <span class="nav_name">Quotations</span>
         </a>
       </div>
 
-      <div class="nav_list" *ngIf="userType==='fuelPumper'">
-        <a class="nav_link" [routerLink]="'/update_quota'"
-           #update_quota_fuelPumper="routerLinkActive"
-           routerLinkActive
-           [ngClass]="update_quota_fuelPumper.isActive?'active':''">
-          <i class='bx bx-qr nav_icon'></i>
-          <span class="nav_name">Fuel Quota</span>
-        </a>
-        <a class="nav_link" [routerLink]="'/mark_attendance'"
+      <div class="nav_list" *ngIf="userType==='supplier'">
+        <a class="nav_link" [routerLink]="'/purchase_orders'"
            #mark_attendance_fuelPumper="routerLinkActive"
            routerLinkActive
            [ngClass]="mark_attendance_fuelPumper.isActive?'active':''">
           <i class='bx bx-user nav_icon'></i>
-          <span class="nav_name">Attendance</span>
+          <span class="nav_name">Purchase Orders</span>
         </a>
-        <a class="nav_link" [routerLink]="'/vehicle_details'"
-           #vehicle_details_fuelPumper="routerLinkActive"
+        <a class="nav_link" [routerLink]="'/view_quotations_s'"
+           #update_quota_fuelPumper="routerLinkActive"
            routerLinkActive
-           [ngClass]="vehicle_details_fuelPumper.isActive?'active':''">
-          <i class='bx bxs-car nav_icon'></i>
-          <span class="nav_name">Vehicle Details</span>
-        </a>
-        <a class="nav_link" [routerLink]="'/fuel_report'"
-           #fuel_report_fuelPumper="routerLinkActive"
-           routerLinkActive
-           [ngClass]="fuel_report_fuelPumper.isActive?'active':''">
-          <i class='fa-solid fa-chart-simple nav_icon'></i>
-          <span class="nav_name">Fuel Report</span>
+           [ngClass]="update_quota_fuelPumper.isActive?'active':''">
+          <i class='bx bx-qr nav_icon'></i>
+          <span class="nav_name">Quotations</span>
         </a>
       </div>
 

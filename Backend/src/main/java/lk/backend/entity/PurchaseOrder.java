@@ -29,6 +29,10 @@ public class PurchaseOrder implements IDCreator {
     private AppUser warehouseManager;
     @ManyToOne
     private AppUser supplier;
+    @ManyToOne
+    private AppUser procumentOfficer;
+    @ManyToOne
+    private AppUser siteManager;
     @Transient
     private int poQuantity;
     @Transient
@@ -42,6 +46,7 @@ public class PurchaseOrder implements IDCreator {
     private boolean poFinalized;
     private boolean soFinalized;
     private boolean poAccepted;
+    private boolean poApproved;
     private LocalDate addedAt;
     @Transient
     private String addedAtFormatted;
@@ -66,6 +71,7 @@ public class PurchaseOrder implements IDCreator {
         this.orderReference = purchaseOrder.orderReference;
         this.deliverNote = purchaseOrder.deliverNote;
         this.poAccepted = purchaseOrder.poAccepted;
+        this.poApproved = purchaseOrder.poApproved;
         this.addedAt = purchaseOrder.addedAt;
 //        this.addedAtFormatted= purchaseOrder.addedAtFormatted;
         this.siteName = purchaseOrder.siteName;
@@ -74,7 +80,7 @@ public class PurchaseOrder implements IDCreator {
         this.handlingInstruction = purchaseOrder.handlingInstruction;
     }
 
-    public PurchaseOrder(PurchaseOrder purchaseOrder, AppUser warehouseManager, AppUser supplier) {
+    public PurchaseOrder(PurchaseOrder purchaseOrder, AppUser warehouseManager, AppUser supplier, AppUser siteManager) {
         this(purchaseOrder);
         if (supplier != null) {
             this.supplier = new AppUser(supplier);
@@ -82,51 +88,13 @@ public class PurchaseOrder implements IDCreator {
         if (warehouseManager != null) {
             this.warehouseManager = new AppUser(warehouseManager);
         }
+        if (siteManager != null) {
+            this.siteManager = new AppUser(siteManager);
+        }
     }
 
     public String getFormattedId() {
         return "PO" + id;
     }
 
-    public int getSOItemQuantity() {
-        int total = 0;
-        for (PurchaseOrderDetail purchaseOrderDetail : purchaseOrderDetails) {
-            total += purchaseOrderDetail.getSoQuantity();
-        }
-        return total;
-    }
-
-    public int getPOItemQuantity() {
-        int total = 0;
-        for (PurchaseOrderDetail purchaseOrderDetail : purchaseOrderDetails) {
-            total += purchaseOrderDetail.getPoQuantity();
-        }
-        return total;
-    }
-
-    public double getSOItemTotalAmount() {
-        double total = 0;
-        for (PurchaseOrderDetail purchaseOrderDetail : purchaseOrderDetails) {
-            total += (purchaseOrderDetail.getSoQuantity() * purchaseOrderDetail.getSoUnitPrice());
-        }
-        return total;
-    }
-
-    public double getPOItemTotalAmount() {
-        double total = 0;
-        for (PurchaseOrderDetail purchaseOrderDetail : purchaseOrderDetails) {
-            total += (purchaseOrderDetail.getPoQuantity() * purchaseOrderDetail.getPoUnitPrice());
-        }
-        return total;
-    }
-
-    public String getFormattedDate() {
-        return addedAt.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-    }
-
-    public void poDetailsToPoMapper() {
-        for (PurchaseOrderDetail purchaseOrderDetail : purchaseOrderDetails) {
-            purchaseOrderDetail.setPurchaseOrder(this);
-        }
-    }
 }

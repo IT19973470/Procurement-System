@@ -51,11 +51,11 @@ export class PurchaseOrderDetailsComponent implements OnInit {
     this.order = this.supplierService.order
     this.orderDetails = this.supplierService.order.purchaseOrderDetailList
     // console.log(this.orderDetails)
-    for (let orderDetail of this.orderDetails) {
-      orderDetail.soUnitPrice = orderDetail.poUnitPrice
-      orderDetail.soQuantity = orderDetail.poQuantity
-    }
-    console.log(this.order)
+    // for (let orderDetail of this.orderDetails) {
+    //   orderDetail.soUnitPrice = orderDetail.poUnitPrice
+    //   orderDetail.soQuantity = orderDetail.poQuantity
+    // }
+    // console.log(this.order)
   }
 
   viewInvoice() {

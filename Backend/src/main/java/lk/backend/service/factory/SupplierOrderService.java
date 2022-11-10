@@ -19,7 +19,7 @@ public class SupplierOrderService implements OrderService {
         List<PurchaseOrder> purchaseOrders = purchaseOrderRepository.getAllBySupplierId(id);
         List<PurchaseOrder> purchaseOrderList = new ArrayList<>();
         for (PurchaseOrder purchaseOrder : purchaseOrders) {
-            PurchaseOrder purchaseOrderObj = new PurchaseOrder(purchaseOrder, purchaseOrder.getWarehouseManager(), null);
+            PurchaseOrder purchaseOrderObj = new PurchaseOrder(purchaseOrder, null, null, purchaseOrder.getSiteManager());
             List<PurchaseOrderDetail> purchaseOrderDetails = new ArrayList<>();
             for (PurchaseOrderDetail purchaseOrderDetail : purchaseOrder.getPurchaseOrderDetails()) {
                 purchaseOrderObj.setPoTotal(purchaseOrderObj.getPoTotal() + (purchaseOrderDetail.getPoUnitPrice() * purchaseOrderDetail.getPoQuantity()));

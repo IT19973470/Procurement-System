@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {SupplierService} from "../../../_service/supplier.service";
 import {WarehouseService} from "../../../_service/warehouse.service";
 import {ProcumentOfficerService} from "../../../_service/procument-officer.service";
+import {SiteManagerService} from "../../../_service/site-manager.service";
 
 @Component({
   selector: 'app-edit-purchase-order-details',
@@ -42,7 +43,7 @@ export class EditPurchaseOrderDetailsComponent implements OnInit {
   orderDetails = []
   total = 0
 
-  constructor(private wareHouseService: WarehouseService, private procumentOfficerService: ProcumentOfficerService) {
+  constructor(private wareHouseService: WarehouseService, private procumentOfficerService: ProcumentOfficerService, private siteManagerService: SiteManagerService, private router: Router) {
     this.item = this.procumentOfficerService.newItem()
   }
 
@@ -87,9 +88,47 @@ export class EditPurchaseOrderDetailsComponent implements OnInit {
   item
 
   addItem() {
-    this.orderDetails.push(JSON.parse(JSON.stringify(this.item)))
-    this.calcTotal()
+    let poDetail = {
+      id: 'PD' + this.order.id + this.item.id,
+      material: {
+        id: this.item.id
+      },
+      poUnitPrice: this.item.poUnitPrice,
+      poQuantity: this.item.poQuantity,
+      purchaseOrder: {
+        id: this.order.id
+      }
+    }
+    this.procumentOfficerService.updatePR(poDetail).subscribe((item) => {
+      this.orderDetails.push({
+        id: item.id,
+        material: {
+          id: this.item.id,
+          itemName: this.item.itemName,
+          itemType: this.item.itemType
+        },
+        poUnitPrice: this.item.poUnitPrice,
+        poQuantity: this.item.poQuantity
+      })
+      this.calcTotal()
+    })
     this.isTrueOrFalseDetails(false)
   }
 
+  getItemById() {
+    this.siteManagerService.getItemById(this.item.id).subscribe(item => {
+      this.item = item
+    })
+  }
+
+  approvePR() {
+    this.order.purchaseOrderDetails = this.orderDetails
+    this.procumentOfficerService.approveOrder(this.order.id).subscribe(() => {
+      this.router.navigate(['/edit_purchase_orders'])
+    })
+  }
+
+  viewSuppliers() {
+    this.router.navigate(['/send_quotations'])
+  }
 }

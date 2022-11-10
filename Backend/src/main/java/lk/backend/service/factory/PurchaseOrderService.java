@@ -16,10 +16,10 @@ public class PurchaseOrderService implements OrderService {
 
     @Override
     public List<PurchaseOrder> getOrders(PurchaseOrderRepository purchaseOrderRepository, String id) {
-        List<PurchaseOrder> purchaseOrders = purchaseOrderRepository.getAllByWarehouseManagerIdAndPoFinalized(id, true);
+        List<PurchaseOrder> purchaseOrders = purchaseOrderRepository.getAllBySiteManagerCompanyCompanyIdAndPoFinalized(id, true);
         List<PurchaseOrder> purchaseOrderList = new ArrayList<>();
         for (PurchaseOrder purchaseOrder : purchaseOrders) {
-            PurchaseOrder purchaseOrderObj = new PurchaseOrder(purchaseOrder, null, purchaseOrder.getSupplier());
+            PurchaseOrder purchaseOrderObj = new PurchaseOrder(purchaseOrder, null, purchaseOrder.getSupplier(), purchaseOrder.getSiteManager());
             List<PurchaseOrderDetail> purchaseOrderDetails = new ArrayList<>();
             for (PurchaseOrderDetail purchaseOrderDetail : purchaseOrder.getPurchaseOrderDetails()) {
                 purchaseOrderDetails.add(new PurchaseOrderDetail(purchaseOrderDetail));

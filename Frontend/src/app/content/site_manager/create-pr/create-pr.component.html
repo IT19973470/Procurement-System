@@ -4,7 +4,7 @@
     <i class="fa fa-arrow-left" style="font-size: 30px" [routerLink]="'/view_pr'"></i>
   </div>
   <div style="margin-top: 20px;display: flex">
-    <div style="font-weight: bold;color: #b68003;font-size: 21px;width: calc(100% - 250px)">New Purchase Order</div>
+    <div style="font-weight: bold;color: #b68003;font-size: 21px;width: calc(100% - 250px)">New Purchase Order (Site Manager)</div>
   </div>
 </div>
 
@@ -53,10 +53,10 @@
           <input type="text" [(ngModel)]="orderDetail.id">
         </td>
         <td>
-          <input type="text" [(ngModel)]="orderDetail.itemName">
+          <input type="text" [(ngModel)]="orderDetail.material.itemName">
         </td>
         <td>
-          <input type="text" [(ngModel)]="orderDetail.itemType">
+          <input type="text" [(ngModel)]="orderDetail.material.itemType">
         </td>
         <td>
           <input type="number" [(ngModel)]="orderDetail.poUnitPrice">
@@ -96,14 +96,14 @@
   <div style="margin-top: 20px">
     <div style="font-weight: bold">Add Notes</div>
     <div>
-      <textarea class="form-control" cols="30" rows="4">{{order.note}}</textarea>
+      <textarea class="form-control" cols="30" rows="4" [(ngModel)]="order.deliverNote"></textarea>
     </div>
   </div>
 
   <div style="margin-top: 20px">
     <div style="font-weight: bold">Handling Instructions</div>
     <div>
-      <textarea class="form-control" cols="30" rows="4">{{order.handlingInstruction}}</textarea>
+      <textarea class="form-control" cols="30" rows="4" [(ngModel)]="order.handlingInstruction"></textarea>
     </div>
   </div>
 

@@ -22,6 +22,10 @@ export class SupplierService {
     return this.http.put<any>(environment.backend_url + '/supplier/finalizePurchaseOrder/' + order.id, order);
   }
 
+  finalizeQuotation(order): Observable<any> {
+    return this.http.put<any>(environment.backend_url + '/supplier/finalizeQuotation/' + JSON.parse(localStorage.getItem('user')).id, order);
+  }
+
   acceptOrder(orderId) {
     return this.http.get<any>(environment.backend_url + '/supplier/acceptOrder/' + orderId);
   }
@@ -37,6 +41,10 @@ export class SupplierService {
 
   getPurchaseOrders(): Observable<any> {
     return this.http.get<any>(environment.backend_url + '/supplier/getPurchaseOrders/' + JSON.parse(localStorage.getItem('user')).id);
+  }
+
+  getQuotations(): Observable<any> {
+    return this.http.get<any>(environment.backend_url + '/supplier/getQuotations/' + JSON.parse(localStorage.getItem('user')).id);
   }
 
   getFinalizedPurchaseOrders(): Observable<any> {

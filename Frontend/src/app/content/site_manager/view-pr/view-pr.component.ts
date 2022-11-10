@@ -1,6 +1,7 @@
 // @ts-nocheck
 import {Component, OnInit} from '@angular/core';
 import {SiteManagerService} from "../../../_service/site-manager.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-view-pr',
@@ -17,7 +18,7 @@ export class ViewPrComponent implements OnInit {
     foundLetter: ''
   };
 
-  constructor(private siteManagerService: SiteManagerService) {
+  constructor(private siteManagerService: SiteManagerService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -32,5 +33,10 @@ export class ViewPrComponent implements OnInit {
     this.siteManagerService.getPRs().subscribe(prs => {
       this.orders = prs
     })
+  }
+
+  viewPRDetails(order) {
+    this.siteManagerService.order = order
+    this.router.navigate(['/view_pr_details'])
   }
 }

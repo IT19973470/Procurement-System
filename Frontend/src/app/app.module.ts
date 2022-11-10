@@ -19,10 +19,17 @@ import {InvoiceComponent} from './content/supplier/invoice/invoice.component';
 import {AlertBoxComponent} from './alert-box/alert-box.component';
 import {EditPurchaseOrderComponent} from './content/procument_officer/edit-purchase-order/edit-purchase-order.component';
 import {EditPurchaseOrderDetailsComponent} from './content/procument_officer/edit-purchase-order-details/edit-purchase-order-details.component';
-import {SendToSuppliersComponent} from './content/procument_officer/send-to-suppliers/send-to-suppliers.component';
 import {ManageMaterialComponent} from './content/site_manager/manage-material/manage-material.component';
 import { CreatePrComponent } from './content/site_manager/create-pr/create-pr.component';
 import { ViewPrComponent } from './content/site_manager/view-pr/view-pr.component';
+import { LoginComponent } from './login/login.component';
+import { ViewPrDetailsComponent } from './content/site_manager/view-pr-details/view-pr-details.component';
+import { SendQuotationsComponent } from './content/procument_officer/send-quotations/send-quotations.component';
+import { ViewQuotationsPoComponent } from './content/procument_officer/view_quotation/view-quotations-po/view-quotations-po.component';
+import { ViewQuotationDetailsPoComponent } from './content/procument_officer/view_quotation/view-quotation-details-po/view-quotation-details-po.component';
+import { ViewQuotationSuppliersComponent } from './content/procument_officer/view_quotation/view-quotation-suppliers/view-quotation-suppliers.component';
+import { ViewQuotationSComponent } from './content/supplier/view-quotation-s/view-quotation-s.component';
+import { ViewQuotationDetailsSComponent } from './content/supplier/view-quotation-details-s/view-quotation-details-s.component';
 
 const customNotifierOptions: NotifierOptions = {
   position: {
@@ -80,10 +87,17 @@ const customNotifierOptions: NotifierOptions = {
     AlertBoxComponent,
     EditPurchaseOrderComponent,
     EditPurchaseOrderDetailsComponent,
-    SendToSuppliersComponent,
     ManageMaterialComponent,
     CreatePrComponent,
-    ViewPrComponent
+    ViewPrComponent,
+    LoginComponent,
+    ViewPrDetailsComponent,
+    SendQuotationsComponent,
+    ViewQuotationsPoComponent,
+    ViewQuotationDetailsPoComponent,
+    ViewQuotationSuppliersComponent,
+    ViewQuotationSComponent,
+    ViewQuotationDetailsSComponent
   ],
   imports: [
     BrowserModule,

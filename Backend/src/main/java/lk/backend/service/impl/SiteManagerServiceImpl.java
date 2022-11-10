@@ -1,10 +1,7 @@
 package lk.backend.service.impl;
 
-import lk.backend.entity.Material;
-import lk.backend.entity.PurchaseOrder;
-import lk.backend.entity.PurchaseOrderDetail;
-import lk.backend.repository.MaterialRepository;
-import lk.backend.repository.PurchaseOrderRepository;
+import lk.backend.entity.*;
+import lk.backend.repository.*;
 import lk.backend.service.SiteManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,6 +43,11 @@ public class SiteManagerServiceImpl implements SiteManagerService {
     @Override
     public PurchaseOrder addPR(PurchaseOrder purchaseOrder) {
         purchaseOrder.setId(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddhhmmss")));
+        for (PurchaseOrderDetail purchaseOrderDetail : purchaseOrder.getPurchaseOrderDetails()) {
+            purchaseOrderDetail.setId("PD" + purchaseOrder.getId() + purchaseOrderDetail.getId());
+            purchaseOrderDetail.setStatus("Incomplete");
+            purchaseOrderDetail.setPurchaseOrder(purchaseOrder);
+        }
         purchaseOrderRepository.save(purchaseOrder);
         return new PurchaseOrder(purchaseOrder);
     }

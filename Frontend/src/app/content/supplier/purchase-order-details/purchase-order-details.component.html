@@ -59,25 +59,25 @@
       <!--</tr>-->
       <tr *ngFor="let orderDetail of orderDetails;let i = index">
         <td>{{orderDetail.id}}</td>
-        <td>{{orderDetail.itemName}}</td>
-        <td>{{orderDetail.itemType}}</td>
+        <td>{{orderDetail.material.itemName}}</td>
+        <td>{{orderDetail.material.itemType}}</td>
         <td>{{orderDetail.poUnitPrice | number : '1.2-2'}}</td>
-        <td>
-          <input [readonly]="!order.poAccepted" type="number" [(ngModel)]="orderDetail.soUnitPrice"
-                 (change)="calcTotal()">
-        </td>
+        <!--<td>-->
+        <!--<input [readonly]="!order.poAccepted" type="number" [(ngModel)]="orderDetail.soUnitPrice"-->
+        <!--(change)="calcTotal()">-->
+        <!--</td>-->
+        <td>{{orderDetail.soUnitPrice}}</td>
         <td>{{orderDetail.poQuantity}}</td>
-        <td>
-          <input [readonly]="!order.poAccepted" type="number" [(ngModel)]="orderDetail.soQuantity"
-                 (change)="calcTotal()">
-        </td>
+        <!--<td>-->
+        <!--<input [readonly]="!order.poAccepted" type="number" [(ngModel)]="orderDetail.soQuantity"-->
+        <!--(change)="calcTotal()">-->
+        <!--</td>-->
+        <td>{{orderDetail.soQuantity}}</td>
         <td>{{(orderDetail.soUnitPrice * orderDetail.soQuantity) | number : '1.2-2'}}</td>
-        <td style="text-align: center" *ngIf="orderDetail.status==='Complete'"
-            (click)="orderDetail.status='Incomplete'">
+        <td style="text-align: center" *ngIf="orderDetail.status==='Complete'">
           <i class="fa fa-check"></i>
         </td>
-        <td style="text-align: center" *ngIf="orderDetail.status==='Incomplete'"
-            (click)="orderDetail.status='Complete'">
+        <td style="text-align: center" *ngIf="orderDetail.status==='Incomplete'">
           <i class="fa fa-times"></i>
         </td>
       </tr>

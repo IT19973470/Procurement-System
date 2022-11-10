@@ -1,3 +1,4 @@
+import lk.backend.dto.PurchaseOrderDTO;
 import lk.backend.entity.PurchaseOrder;
 import lk.backend.entity.PurchaseOrderDetail;
 import lk.backend.repository.PurchaseOrderRepository;
@@ -44,7 +45,7 @@ public class TestSiteManager {
 
     @Test
     public void getPOItemQuantity() {
-        PurchaseOrder purchaseOrder = new PurchaseOrder();
+        PurchaseOrderDTO purchaseOrder = new PurchaseOrderDTO();
         purchaseOrder.setPurchaseOrderDetails(new HashSet<>());
         Set<PurchaseOrderDetail> purchaseOrderDetails = purchaseOrder.getPurchaseOrderDetails();
 

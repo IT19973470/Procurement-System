@@ -9,5 +9,5 @@ public interface PurchaseOrderRepository extends JpaRepository<PurchaseOrder, St
     //    List<OrderData> getAllByFuelStationId(String id);
     List<PurchaseOrder> getAllBySupplierId(String supplierId);
 
-    List<PurchaseOrder> getAllByWarehouseManagerIdAndPoFinalized(String supplierId, boolean finalized);
+    List<PurchaseOrder> getAllBySiteManagerCompanyCompanyIdAndPoFinalized(String company, boolean finalized);
 }

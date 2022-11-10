@@ -40,8 +40,8 @@
       <tbody>
       <tr *ngFor="let orderDetail of orderDetails;let i = index">
         <td>{{orderDetail.id}}</td>
-        <td>{{orderDetail.itemName}}</td>
-        <td>{{orderDetail.itemType}}</td>
+        <td>{{orderDetail.material.itemName}}</td>
+        <td>{{orderDetail.material.itemType}}</td>
         <td>{{orderDetail.poUnitPrice | number : '1.2-2'}}</td>
         <td>{{orderDetail.soUnitPrice | number : '1.2-2'}}</td>
         <td>{{orderDetail.poQuantity}}</td>

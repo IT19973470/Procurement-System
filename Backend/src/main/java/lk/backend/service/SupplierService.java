@@ -38,4 +38,8 @@ public interface SupplierService {
     boolean acceptOrder(String orderId);
 
     PurchaseOrder finalizePurchaseOrder(PurchaseOrder purchaseOrder, String id);
+
+    List<PurchaseOrder> getQuotations(String supplierId);
+
+    boolean finalizeQuotation(PurchaseOrder purchaseOrder, String supplierId);
 }

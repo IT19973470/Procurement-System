@@ -31,6 +31,8 @@ public class PurchaseOrderDetail implements IDCreator {
     private double soUnitPrice;
     private int soQuantity;
     private String status;
+    @Transient
+    private String quotationDetailId;
 
     public PurchaseOrderDetail(PurchaseOrderDetail purchaseOrderDetail) {
         this.id = purchaseOrderDetail.id;
@@ -44,10 +46,10 @@ public class PurchaseOrderDetail implements IDCreator {
         this.status = purchaseOrderDetail.status;
     }
 
-    public PurchaseOrderDetail(PurchaseOrderDetail purchaseOrderDetail, PurchaseOrder purchaseOrder, AppUser warehouseManager, AppUser supplier) {
+    public PurchaseOrderDetail(PurchaseOrderDetail purchaseOrderDetail, PurchaseOrder purchaseOrder, AppUser warehouseManager, AppUser supplier, AppUser siteManager) {
         this(purchaseOrderDetail);
         if (purchaseOrder != null && warehouseManager != null && supplier != null) {
-            this.purchaseOrder = new PurchaseOrder(purchaseOrder, warehouseManager, supplier);
+            this.purchaseOrder = new PurchaseOrder(purchaseOrder, warehouseManager, supplier, siteManager);
         }
     }
 

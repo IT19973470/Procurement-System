@@ -31,10 +31,10 @@ public class WarehouseController {
 //    }
 
     @GetMapping(value = "/getFinalizedSupplierOrders/{warehouseId}")
-    public ResponseEntity getFinalizedSupplierOrders(@RequestBody PurchaseOrder purchaseOrder, @PathVariable String warehouseId) {
-//        return warehouseService.getFinalizedSupplierOrders(warehouseId);
-        finalizeOrderCommand.commandSupplierOrder = new FinalizeSupplierOrder(warehouseService);
-        return ResponseEntity.ok(finalizeOrderCommand.commandSupplierOrder.finalizeOrder(purchaseOrder, warehouseId));
+    public ResponseEntity getFinalizedSupplierOrders(@PathVariable String warehouseId) {
+        return ResponseEntity.ok(warehouseService.getFinalizedSupplierOrders(warehouseId));
+//        finalizeOrderCommand.commandSupplierOrder = new FinalizeSupplierOrder(warehouseService);
+//        return ResponseEntity.ok(finalizeOrderCommand.commandSupplierOrder.finalizeOrder(purchaseOrder, warehouseId));
     }
 
 //    @GetMapping(value = "/getPumpedAmounts/{id}")
