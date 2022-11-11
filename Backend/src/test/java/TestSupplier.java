@@ -1,3 +1,4 @@
+import lk.backend.dto.PurchaseOrderDTO;
 import lk.backend.entity.PurchaseOrder;
 import lk.backend.entity.PurchaseOrderDetail;
 import lk.backend.service.factory.OrderFactory;
@@ -14,7 +15,7 @@ public class TestSupplier {
 
     @Test
     public void getPOItemTotalAmount() {
-        PurchaseOrder purchaseOrder = new PurchaseOrder();
+        PurchaseOrderDTO purchaseOrder = new PurchaseOrderDTO();
         purchaseOrder.setPurchaseOrderDetails(new HashSet<>());
         Set<PurchaseOrderDetail> purchaseOrderDetails = purchaseOrder.getPurchaseOrderDetails();
 

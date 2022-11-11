@@ -61,4 +61,20 @@ export class EditPurchaseOrderComponent implements OnInit {
       this.orders = prs
     })
   }
+
+  calcTotalP(order) {
+    let total = 0
+    for (let orderDetail of order.purchaseOrderDetailList) {
+      total += (orderDetail.poUnitPrice * orderDetail.poQuantity)
+    }
+    return total;
+  }
+
+  calcTotalS(order) {
+    let total = 0
+    for (let orderDetail of order.purchaseOrderDetailList) {
+      total += (orderDetail.soUnitPrice * orderDetail.soQuantity)
+    }
+    return total;
+  }
 }

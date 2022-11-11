@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {SupplierService} from "../../../_service/supplier.service";
 import {WarehouseService} from "../../../_service/warehouse.service";
 import {ProcumentOfficerService} from "../../../_service/procument-officer.service";
+import {SiteManagerService} from "../../../_service/site-manager.service";
 
 @Component({
   selector: 'app-edit-purchase-order-details',
@@ -40,9 +41,8 @@ export class EditPurchaseOrderDetailsComponent implements OnInit {
 
   order
   orderDetails = []
-  total = 0
 
-  constructor(private wareHouseService: WarehouseService, private procumentOfficerService: ProcumentOfficerService) {
+  constructor(private wareHouseService: WarehouseService, private procumentOfficerService: ProcumentOfficerService, private siteManagerService: SiteManagerService, private router: Router) {
     this.item = this.procumentOfficerService.newItem()
   }
 
@@ -68,12 +68,16 @@ export class EditPurchaseOrderDetailsComponent implements OnInit {
     // }
   }
 
+  totalR = 0
+  totalN = 0
+
   calcTotal() {
-    this.total = 0
+    this.totalR = 0
+    this.totalN = 0
     for (let orderDetail of this.orderDetails) {
-      this.total += (orderDetail.poUnitPrice * orderDetail.poQuantity)
+      this.totalR += (orderDetail.poUnitPrice * orderDetail.poQuantity)
+      this.totalN += (orderDetail.soUnitPrice * orderDetail.soQuantity)
     }
-    // this.wareHouseService.order.poTotal = this.total
   }
 
   isTrueOrFalseDetails(reply) {
@@ -87,9 +91,71 @@ export class EditPurchaseOrderDetailsComponent implements OnInit {
   item
 
   addItem() {
-    this.orderDetails.push(JSON.parse(JSON.stringify(this.item)))
-    this.calcTotal()
+    let poDetail = {
+      id: 'PD' + this.order.id + this.item.id,
+      material: {
+        id: this.item.id
+      },
+      poUnitPrice: this.item.poUnitPrice,
+      poQuantity: this.item.poQuantity,
+      purchaseOrder: {
+        id: this.order.id
+      }
+    }
+    this.procumentOfficerService.updatePR(poDetail).subscribe((item) => {
+      this.orderDetails.push({
+        id: item.id,
+        material: {
+          id: this.item.id,
+          itemName: this.item.itemName,
+          itemType: this.item.itemType
+        },
+        poUnitPrice: this.item.poUnitPrice,
+        poQuantity: this.item.poQuantity,
+        soUnitPrice: 0,
+        soQuantity: 0
+      })
+      this.calcTotal()
+    })
     this.isTrueOrFalseDetails(false)
   }
 
+  getItemById() {
+    this.siteManagerService.getItemById(this.item.id).subscribe(item => {
+      this.item = item
+    })
+  }
+
+  approvePR() {
+    this.order.purchaseOrderDetails = this.orderDetails
+    this.procumentOfficerService.approveOrder(this.order.id).subscribe(() => {
+      this.router.navigate(['/edit_purchase_orders'])
+    })
+  }
+
+  viewSuppliers() {
+    this.router.navigate(['/send_quotations'])
+  }
+
+  removeItem(id, index) {
+    this.siteManagerService.removeItem(id).subscribe(() => {
+      this.orderDetails.splice(index, 1);
+    })
+  }
+
+  rejectPR() {
+    this.siteManagerService.rejectPurchaseOrder(this.order.id).subscribe(() => {
+      this.router.navigate(['/edit_purchase_orders'])
+    })
+  }
+
+  editInfo() {
+    this.siteManagerService.editInfo(this.order).subscribe()
+  }
+
+  payOrder() {
+    this.procumentOfficerService.payOrder(this.order.id).subscribe(() => {
+      this.router.navigate(['/edit_purchase_orders'])
+    })
+  }
 }

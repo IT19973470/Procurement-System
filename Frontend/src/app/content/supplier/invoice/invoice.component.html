@@ -5,7 +5,7 @@
   <div style="margin-top: 20px">
     <div style="font-weight: bold;color: #b68003;font-size: 21px;width: calc(100% - 250px);margin-bottom: 20px">Invoice</div>
     <span style="font-weight: bold">Buyer : </span>
-    <span>{{order.warehouseManager.name}}</span>
+    <span>{{order.siteManager.company.companyName}}</span>
   </div>
   <div style="margin-top: 20px">
     <span style="font-weight: bold">Purchase Order Reference : </span>
@@ -39,8 +39,8 @@
       <!--</tr>-->
       <tr *ngFor="let orderDetail of orderDetails;let i = index">
         <td>{{orderDetail.id}}</td>
-        <td>{{orderDetail.itemName}}</td>
-        <td>{{orderDetail.itemType}}</td>
+        <td>{{orderDetail.material.itemName}}</td>
+        <td>{{orderDetail.material.itemType}}</td>
         <td>{{orderDetail.soUnitPrice | number : '1.2-2'}}</td>
         <td>{{orderDetail.soQuantity}}</td>
         <td>{{(orderDetail.soUnitPrice * orderDetail.soQuantity) | number : '1.2-2'}}</td>
@@ -62,7 +62,7 @@
   </div>
 
   <div style="margin-top: 20px;text-align: right">
-    <button class="btn btn-success" style="margin-left: 20px">Deliver Order</button>
+    <button class="btn btn-success" style="margin-left: 20px" (click)="deliverOrder()">Deliver Order</button>
   </div>
 
 </div>

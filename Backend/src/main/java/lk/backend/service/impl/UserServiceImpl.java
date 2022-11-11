@@ -1,13 +1,11 @@
 package lk.backend.service.impl;
 
+import java.util.Optional;
 import lk.backend.entity.AppUser;
 import lk.backend.repository.UserRepository;
 import lk.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -26,8 +24,4 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
-//    @Override
-//    public List<FuelStationPlace> getPlaces() {
-//        return fuelStationPlaceRepository.getFuelStationPlaces();
-//    }
 }

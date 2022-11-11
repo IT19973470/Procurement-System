@@ -1,10 +1,10 @@
 <app-alert-box *ngIf="alertBox.alert" [alertMsg]="alertBox"></app-alert-box>
 <div class="row" style="margin-top: 75px;margin-left: 0px;margin-right: 0px">
-  <div style="margin-top: 20px">
+  <div style="">
     <i class="fa fa-arrow-left" style="font-size: 30px" [routerLink]="'/view_pr'"></i>
   </div>
   <div style="margin-top: 20px;display: flex">
-    <div style="font-weight: bold;color: #b68003;font-size: 21px;width: calc(100% - 250px)">New Purchase Order</div>
+    <div style="font-weight: bold;color: #b68003;font-size: 18px">New Purchase Order (Site Manager)</div>
   </div>
 </div>
 
@@ -33,59 +33,64 @@
     </div>
 
     <div style="text-align: right">
-      <button class="btn btn-warning" (click)="isTrueOrFalseDetails(true)" style="margin-top: 20px">Add Item</button>
+      <button class="btn btn-warning" (click)="isTrueOrFalseDetails(true)" style="margin-top: 20px;margin-bottom: 20px">Add Item</button>
     </div>
-    <table class="table" width="100%" border="1px solid black" style="margin-top: 20px">
-      <thead class="thead-dark">
-      <th>Item No</th>
-      <th>Item Name</th>
-      <th>Item Type</th>
-      <th>Unit Price</th>
-      <!--<th>N.Unit Price</th>-->
-      <th>Quantity</th>
-      <!--<th>N.Quantity</th>-->
-      <th>Total</th>
-      <th style="text-align: center">Remove</th>
-      </thead>
-      <tbody>
-      <tr *ngFor="let orderDetail of orderDetails;let i = index">
-        <td>
-          <input type="text" [(ngModel)]="orderDetail.id">
-        </td>
-        <td>
-          <input type="text" [(ngModel)]="orderDetail.itemName">
-        </td>
-        <td>
-          <input type="text" [(ngModel)]="orderDetail.itemType">
-        </td>
-        <td>
-          <input type="number" [(ngModel)]="orderDetail.poUnitPrice">
-        </td>
-        <td>
-          <input type="number" [(ngModel)]="orderDetail.poQuantity">
-        </td>
-        <!--<td>{{orderDetail.soUnitPrice | number : '1.2-2'}}</td>-->
-        <!--<td>{{orderDetail.soQuantity}}</td>-->
-        <td>{{(orderDetail.poUnitPrice * orderDetail.poQuantity) | number : '1.2-2'}}</td>
-        <td style="text-align: center"><i class="fa fa-times"></i></td>
-        <!--<td style="text-align: center" *ngIf="orderDetail.status==='Complete'"-->
-        <!--(click)="orderDetail.status='Incomplete'">-->
-        <!--<i class="fa fa-check"></i>-->
-        <!--</td>-->
-        <!--<td style="text-align: center" *ngIf="orderDetail.status==='Incomplete'"-->
-        <!--(click)="orderDetail.status='Complete'">-->
-        <!--<i class="fa fa-times"></i>-->
-        <!--</td>-->
-      </tr>
-      <!--<tr *ngFor="let pump of orders;let i = index">-->
-      <!--<td>{{i+1}}</td>-->
-      <!--<td>{{pump.pumpedAtFormatted}}</td>-->
-      <!--<td>{{pump.fuelType.name}}</td>-->
-      <!--<td>{{pump.fuelPumped}}L {{pump.fullTanked?'/ Full':''}}</td>-->
-      <!--<td>{{pump.fuelStation.name}}</td>-->
-      <!--</tr>-->
-      </tbody>
-    </table>
+
+    <div *ngFor="let orderDetail of orderDetails;let i = index" style="border: 1px solid black;border-radius: 10px;margin-bottom: 10px;padding: 10px">
+      <div class="row">
+        <div class="col-6" style="font-weight: bold">
+          Item No
+        </div>
+        <div class="col-6">
+          {{orderDetail.id}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6" style="font-weight: bold">
+          Item Name
+        </div>
+        <div class="col-6">
+          {{orderDetail.material.itemName}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6" style="font-weight: bold">
+          Item Type
+        </div>
+        <div class="col-6">
+          {{orderDetail.material.itemType}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6" style="font-weight: bold">
+          Unit Price
+        </div>
+        <div class="col-6">
+          {{orderDetail.poUnitPrice}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6" style="font-weight: bold">
+          Quantity
+        </div>
+        <div class="col-6">
+          {{orderDetail.poQuantity}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6" style="font-weight: bold">
+          Total
+        </div>
+        <div class="col-6">
+          {{(orderDetail.poUnitPrice * orderDetail.poQuantity) | number : '1.2-2'}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12" style="text-align: right">
+          <button class="btn btn-danger" (click)="removeItem(i)">Remove</button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div style="text-align: right">
@@ -96,14 +101,14 @@
   <div style="margin-top: 20px">
     <div style="font-weight: bold">Add Notes</div>
     <div>
-      <textarea class="form-control" cols="30" rows="4">{{order.note}}</textarea>
+      <textarea class="form-control" cols="30" rows="4" [(ngModel)]="order.deliverNote"></textarea>
     </div>
   </div>
 
   <div style="margin-top: 20px">
     <div style="font-weight: bold">Handling Instructions</div>
     <div>
-      <textarea class="form-control" cols="30" rows="4">{{order.handlingInstruction}}</textarea>
+      <textarea class="form-control" cols="30" rows="4" [(ngModel)]="order.handlingInstruction"></textarea>
     </div>
   </div>
 
@@ -117,38 +122,38 @@
   <div (click)="isTrueOrFalseDetails(false)"></div>
   <div>
     <div class="selectChild" id="imageActivitySize"
-         style="max-height: calc(100vh - 60px);overflow-y: hidden;margin-left: 60px;margin-right: 10px;margin-top: 100px;">
+         style="max-height: calc(100vh - 60px);overflow-y: hidden;margin-top: 10px;">
       <div style="position: absolute;z-index: 99;right: 10px;top: 10px;">
         <i class="fas fa-times" style="cursor: pointer" (click)="isTrueOrFalseDetails(false)"></i>
       </div>
 
       <div class="row" style="padding: 40px">
-        <div class="col-6">
+        <div class="col-12">
           <span>Item No</span>
           <span style="display: flex">
             <input type="text" class="form-control" [(ngModel)]="item.id">
             <i class="fa fa-search" style="padding-top: 10px;padding-left: 10px" (click)="getItemById()"></i>
           </span>
         </div>
-        <div class="col-6">
+        <div class="col-12">
           <span>Item Name</span>
           <span>
             <input type="text" class="form-control" [(ngModel)]="item.itemName">
           </span>
         </div>
-        <div class="col-6">
+        <div class="col-12">
           <span>Item Type</span>
           <span>
             <input type="text" class="form-control" [(ngModel)]="item.itemType">
           </span>
         </div>
-        <div class="col-6">
+        <div class="col-12">
           <span>Quantity</span>
           <span>
             <input type="number" class="form-control" [(ngModel)]="item.poQuantity">
           </span>
         </div>
-        <div class="col-6">
+        <div class="col-12">
           <span>Unit Price</span>
           <span>
             <input type="number" class="form-control" [(ngModel)]="item.poUnitPrice">

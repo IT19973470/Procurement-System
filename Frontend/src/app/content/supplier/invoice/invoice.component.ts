@@ -41,4 +41,10 @@ export class InvoiceComponent implements OnInit {
     }
     this.supplierService.order.poTotal = this.total
   }
+
+  deliverOrder(){
+    this.supplierService.deliverOrder(this.order.id).subscribe(()=>{
+      this.router.navigate(['/purchase_orders'])
+    })
+  }
 }

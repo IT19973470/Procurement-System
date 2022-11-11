@@ -75,9 +75,9 @@ export class CreatePrComponent implements OnInit {
     this.isModalTableDetails.openTable = reply;
   }
 
-  isTrueOrFalseDetailsRej(reply) {
-    this.isModalTableDetailsRej.openTable = reply;
-  }
+  // isTrueOrFalseDetailsRej(reply) {
+  //   this.isModalTableDetailsRej.openTable = reply;
+  // }
 
   item
 
@@ -105,9 +105,15 @@ export class CreatePrComponent implements OnInit {
 
   addPR() {
     this.order.purchaseOrderDetails = this.orderDetails
+    this.order.siteManager = {
+      id: JSON.parse(localStorage.getItem('user')).id
+    }
     this.siteManagerService.addPR(this.order).subscribe(() => {
       this.router.navigate(['/view_pr'])
     })
   }
 
+  removeItem(index) {
+    this.orderDetails.splice(index, 1)
+  }
 }

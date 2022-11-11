@@ -7,5 +7,5 @@ import lombok.Setter;
 @Setter
 public class VehicleReportDTO {
     private int count;
-   private String vehicleType;
+    private String vehicleType;
 }

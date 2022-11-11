@@ -4,6 +4,6 @@ import lk.backend.entity.PurchaseOrder;
 
 public interface CommandOrder {
 
-    PurchaseOrder finalizeOrder(PurchaseOrder purchaseOrder, String id);
+    PurchaseOrder finalizeOrder(PurchaseOrder purchaseOrder, String id, int rating);
 
 }

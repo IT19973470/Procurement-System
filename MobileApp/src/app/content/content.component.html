@@ -1,4 +1,5 @@
-<div [ngStyle]="{'margin-left': getUser()?'70px':'0px'}">
+<!--<div [ngStyle]="{'margin-left': getUser()?'70px':'0px'}">-->
+<div>
   <!--<notifier-container></notifier-container>-->
   <router-outlet></router-outlet>
   <!--<app-fuel-availability></app-fuel-availability>-->
@@ -20,7 +21,8 @@
       <div>
         <div style="position: relative;display: flex;justify-content: center;">
 
-          <div style="color: green;font-weight: bold;width: 1200px;font-size: 40px;text-align: center">{{reply.msg}}</div>
+          <div style="color: green;font-weight: bold;width: 1200px;font-size: 40px;text-align: center">{{reply.msg}}
+          </div>
 
         </div>
       </div>

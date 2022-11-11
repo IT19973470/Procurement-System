@@ -4,7 +4,7 @@
     <i class="fa fa-arrow-left" style="font-size: 30px" [routerLink]="'/view_pr'"></i>
   </div>
   <div style="margin-top: 20px;display: flex">
-    <div style="font-weight: bold;color: #b68003;font-size: 21px;width: calc(100% - 250px)">New Purchase Order</div>
+    <div style="font-weight: bold;color: #b68003;font-size: 21px;width: calc(100% - 250px)">New Purchase Order (Site Manager)</div>
   </div>
 </div>
 
@@ -50,32 +50,22 @@
       <tbody>
       <tr *ngFor="let orderDetail of orderDetails;let i = index">
         <td>
-          <input type="text" [(ngModel)]="orderDetail.id">
+          {{orderDetail.id}}
         </td>
         <td>
-          <input type="text" [(ngModel)]="orderDetail.itemName">
+          {{orderDetail.material.itemName}}
         </td>
         <td>
-          <input type="text" [(ngModel)]="orderDetail.itemType">
+          {{orderDetail.material.itemType}}
         </td>
         <td>
-          <input type="number" [(ngModel)]="orderDetail.poUnitPrice">
+          {{orderDetail.poUnitPrice}}
         </td>
         <td>
-          <input type="number" [(ngModel)]="orderDetail.poQuantity">
+          {{orderDetail.poQuantity}}
         </td>
-        <!--<td>{{orderDetail.soUnitPrice | number : '1.2-2'}}</td>-->
-        <!--<td>{{orderDetail.soQuantity}}</td>-->
         <td>{{(orderDetail.poUnitPrice * orderDetail.poQuantity) | number : '1.2-2'}}</td>
-        <td style="text-align: center"><i class="fa fa-times"></i></td>
-        <!--<td style="text-align: center" *ngIf="orderDetail.status==='Complete'"-->
-        <!--(click)="orderDetail.status='Incomplete'">-->
-        <!--<i class="fa fa-check"></i>-->
-        <!--</td>-->
-        <!--<td style="text-align: center" *ngIf="orderDetail.status==='Incomplete'"-->
-        <!--(click)="orderDetail.status='Complete'">-->
-        <!--<i class="fa fa-times"></i>-->
-        <!--</td>-->
+        <td style="text-align: center"><i class="fa fa-times" (click)="removeItem(i)"></i></td>
       </tr>
       <!--<tr *ngFor="let pump of orders;let i = index">-->
       <!--<td>{{i+1}}</td>-->
@@ -96,14 +86,14 @@
   <div style="margin-top: 20px">
     <div style="font-weight: bold">Add Notes</div>
     <div>
-      <textarea class="form-control" cols="30" rows="4">{{order.note}}</textarea>
+      <textarea class="form-control" cols="30" rows="4" [(ngModel)]="order.deliverNote"></textarea>
     </div>
   </div>
 
   <div style="margin-top: 20px">
     <div style="font-weight: bold">Handling Instructions</div>
     <div>
-      <textarea class="form-control" cols="30" rows="4">{{order.handlingInstruction}}</textarea>
+      <textarea class="form-control" cols="30" rows="4" [(ngModel)]="order.handlingInstruction"></textarea>
     </div>
   </div>
 

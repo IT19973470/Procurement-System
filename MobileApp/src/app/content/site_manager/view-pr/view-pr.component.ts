@@ -1,6 +1,7 @@
-// @ts-nocheck
-import { Component, OnInit } from '@angular/core';
-import {SiteManagerService} from "../../../../../../Frontend/src/app/_service/site-manager.service";
+import {Component, OnInit} from '@angular/core';
+import {SiteManagerService} from "../site-manager.service";
+import {Router} from "@angular/router";
+import {ProcumentOfficerService} from "../procument-officer.service";
 
 @Component({
   selector: 'app-view-pr',
@@ -17,7 +18,7 @@ export class ViewPrComponent implements OnInit {
     foundLetter: ''
   };
 
-  constructor(private siteManagerService: SiteManagerService) {
+  constructor(private procumentOfficerService: ProcumentOfficerService, private siteManagerService: SiteManagerService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -31,7 +32,30 @@ export class ViewPrComponent implements OnInit {
   getPRs() {
     this.siteManagerService.getPRs().subscribe(prs => {
       this.orders = prs
+      console.log(this.orders)
     })
   }
+
+  viewPRDetails(order) {
+    this.siteManagerService.order = order
+    this.router.navigate(['/view_pr_details'])
+  }
+
+  calcTotalP(order) {
+    let total = 0
+    for (let orderDetail of order.purchaseOrderDetailList) {
+      total += (orderDetail.poUnitPrice * orderDetail.poQuantity)
+    }
+    return total;
+  }
+
+  calcTotalS(order) {
+    let total = 0
+    for (let orderDetail of order.purchaseOrderDetailList) {
+      total += (orderDetail.soUnitPrice * orderDetail.soQuantity)
+    }
+    return total;
+  }
+
 
 }

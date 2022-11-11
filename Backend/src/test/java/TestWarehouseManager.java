@@ -1,3 +1,4 @@
+import lk.backend.dto.PurchaseOrderDTO;
 import lk.backend.entity.PurchaseOrder;
 import lk.backend.entity.PurchaseOrderDetail;
 import org.junit.Assert;
@@ -14,14 +15,14 @@ public class TestWarehouseManager {
 
     @Test
     public void getFormattedDate() {
-        PurchaseOrder purchaseOrder = new PurchaseOrder();
+        PurchaseOrderDTO purchaseOrder = new PurchaseOrderDTO();
         purchaseOrder.setAddedAt(LocalDate.of(2022, 2, 5));
         Assert.assertEquals("Check the purchase order formatted date", purchaseOrder.getFormattedDate(), "2022-02-05");
     }
 
     @Test
     public void getSOItemTotalAmount() {
-        PurchaseOrder purchaseOrder = new PurchaseOrder();
+        PurchaseOrderDTO purchaseOrder = new PurchaseOrderDTO();
         purchaseOrder.setPurchaseOrderDetails(new HashSet<>());
         Set<PurchaseOrderDetail> purchaseOrderDetails = purchaseOrder.getPurchaseOrderDetails();
 
@@ -45,7 +46,7 @@ public class TestWarehouseManager {
 
     @Test
     public void getSOItemQuantity() {
-        PurchaseOrder purchaseOrder = new PurchaseOrder();
+        PurchaseOrderDTO purchaseOrder = new PurchaseOrderDTO();
         purchaseOrder.setPurchaseOrderDetails(new HashSet<>());
         Set<PurchaseOrderDetail> purchaseOrderDetails = purchaseOrder.getPurchaseOrderDetails();
 

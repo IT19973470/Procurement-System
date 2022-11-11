@@ -1,7 +1,7 @@
-// @ts-nocheck
 import { Component, OnInit } from '@angular/core';
-import {WarehouseService} from "../../../../../../Frontend/src/app/_service/warehouse.service";
-import {SiteManagerService} from "../../../../../../Frontend/src/app/_service/site-manager.service";
+import {WarehouseService} from "../warehouse.service";
+import {SiteManagerService} from "../site-manager.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-create-pr',
@@ -73,9 +73,9 @@ export class CreatePrComponent implements OnInit {
     this.isModalTableDetails.openTable = reply;
   }
 
-  isTrueOrFalseDetailsRej(reply) {
-    this.isModalTableDetailsRej.openTable = reply;
-  }
+  // isTrueOrFalseDetailsRej(reply) {
+  //   this.isModalTableDetailsRej.openTable = reply;
+  // }
 
   item
 
@@ -103,10 +103,15 @@ export class CreatePrComponent implements OnInit {
 
   addPR() {
     this.order.purchaseOrderDetails = this.orderDetails
+    this.order.siteManager = {
+      id: JSON.parse(localStorage.getItem('user')).id
+    }
     this.siteManagerService.addPR(this.order).subscribe(() => {
       this.router.navigate(['/view_pr'])
     })
   }
 
-
+  removeItem(index) {
+    this.orderDetails.splice(index, 1)
+  }
 }

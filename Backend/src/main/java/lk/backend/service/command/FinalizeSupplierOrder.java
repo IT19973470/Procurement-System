@@ -1,7 +1,6 @@
 package lk.backend.service.command;
 
 import lk.backend.entity.PurchaseOrder;
-import lk.backend.service.SupplierService;
 import lk.backend.service.WarehouseService;
 
 public class FinalizeSupplierOrder implements CommandOrder {
@@ -13,8 +12,8 @@ public class FinalizeSupplierOrder implements CommandOrder {
     }
 
     @Override
-    public PurchaseOrder finalizeOrder(PurchaseOrder purchaseOrder, String id) {
-        return warehouseService.finalizeSupplierOrder(purchaseOrder, id);
+    public PurchaseOrder finalizeOrder(PurchaseOrder purchaseOrder, String id, int rating) {
+        return warehouseService.finalizeSupplierOrder(purchaseOrder, id, rating);
     }
 
 }
