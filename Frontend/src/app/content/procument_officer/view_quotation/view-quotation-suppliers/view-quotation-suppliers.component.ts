@@ -34,4 +34,19 @@ export class ViewQuotationSuppliersComponent implements OnInit {
     this.router.navigate(['/view_quotation_details_po'])
   }
 
+  calcTotalP(order) {
+    let total = 0
+    for (let orderDetail of order.purchaseOrderDetailList) {
+      total += (orderDetail.poUnitPrice * orderDetail.poQuantity)
+    }
+    return total;
+  }
+
+  calcTotalS(order) {
+    let total = 0
+    for (let orderDetail of order.purchaseOrderDetailList) {
+      total += (orderDetail.soUnitPrice * orderDetail.soQuantity)
+    }
+    return total;
+  }
 }

@@ -41,7 +41,6 @@ export class EditPurchaseOrderDetailsComponent implements OnInit {
 
   order
   orderDetails = []
-  total = 0
 
   constructor(private wareHouseService: WarehouseService, private procumentOfficerService: ProcumentOfficerService, private siteManagerService: SiteManagerService, private router: Router) {
     this.item = this.procumentOfficerService.newItem()
@@ -69,12 +68,16 @@ export class EditPurchaseOrderDetailsComponent implements OnInit {
     // }
   }
 
+  totalR = 0
+  totalN = 0
+
   calcTotal() {
-    this.total = 0
+    this.totalR = 0
+    this.totalN = 0
     for (let orderDetail of this.orderDetails) {
-      this.total += (orderDetail.poUnitPrice * orderDetail.poQuantity)
+      this.totalR += (orderDetail.poUnitPrice * orderDetail.poQuantity)
+      this.totalN += (orderDetail.soUnitPrice * orderDetail.soQuantity)
     }
-    // this.wareHouseService.order.poTotal = this.total
   }
 
   isTrueOrFalseDetails(reply) {
@@ -108,7 +111,9 @@ export class EditPurchaseOrderDetailsComponent implements OnInit {
           itemType: this.item.itemType
         },
         poUnitPrice: this.item.poUnitPrice,
-        poQuantity: this.item.poQuantity
+        poQuantity: this.item.poQuantity,
+        soUnitPrice: 0,
+        soQuantity: 0
       })
       this.calcTotal()
     })
@@ -130,5 +135,11 @@ export class EditPurchaseOrderDetailsComponent implements OnInit {
 
   viewSuppliers() {
     this.router.navigate(['/send_quotations'])
+  }
+
+  removeItem(id, index) {
+    this.siteManagerService.removeItem(id).subscribe(() => {
+      this.orderDetails.splice(index, 1);
+    })
   }
 }

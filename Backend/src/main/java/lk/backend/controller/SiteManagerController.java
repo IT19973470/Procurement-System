@@ -42,4 +42,9 @@ public class SiteManagerController {
     public ResponseEntity getItemById(@PathVariable String id) {
         return ResponseEntity.ok(siteManagerService.getItemById(id));
     }
+
+    @DeleteMapping(value = "/removeItem/{id}")
+    public ResponseEntity removeItem(@PathVariable String id) {
+        return ResponseEntity.ok(siteManagerService.removeItem(id));
+    }
 }

@@ -50,4 +50,12 @@ export class SupplierOrdersComponent implements OnInit {
       this.orders = orders
     })
   }
+
+  calcTotalS(order) {
+    let total = 0
+    for (let orderDetail of order.purchaseOrderDetailList) {
+      total += (orderDetail.soUnitPrice * orderDetail.soQuantity)
+    }
+    return total;
+  }
 }

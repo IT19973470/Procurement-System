@@ -61,4 +61,13 @@ export class ViewQuotationsPoComponent implements OnInit {
     })
   }
 
+  // calcTotal(order) {
+  //   console.log(order)
+  //   let total = 0
+  //   for (let orderDetail of order.purchaseOrderDetailList) {
+  //     this.total += (orderDetail.soUnitPrice * orderDetail.soQuantity)
+  //   }
+  //   return total;
+  //   // this.wareHouseService.order.poTotal = this.total
+  // }
 }

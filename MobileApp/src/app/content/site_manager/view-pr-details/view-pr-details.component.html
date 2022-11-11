@@ -1,12 +1,9 @@
-<app-alert-box *ngIf="alertBox.alert" [alertMsg]="alertBox"></app-alert-box>
 <div class="row" style="margin-top: 75px;margin-left: 0px;margin-right: 0px">
   <div style="margin-top: 20px">
-    <i class="fa fa-arrow-left" style="font-size: 30px" [routerLink]="'/edit_purchase_orders'"></i>
+    <i class="fa fa-arrow-left" style="font-size: 30px" [routerLink]="'/view_pr'"></i>
   </div>
   <div style="margin-top: 20px;display: flex">
-    <div style="font-weight: bold;color: #b68003;font-size: 21px;width: calc(100% - 250px)">Order Details (Procument
-      Officer)
-    </div>
+    <div style="font-weight: bold;color: #b68003;font-size: 21px;width: calc(100% - 250px)">Order Details (Site Manager)</div>
     <div style="width: 250px;display: flex">
       <input type="text" class="form-control" style="border-radius: 20px" placeholder="Search">
       <i class="fa fa-search" style="font-size: 20px;padding: 10px 10px 10px 15px"></i>
@@ -40,7 +37,7 @@
       <th>R.Quantity</th>
       <th>N.Quantity</th>
       <th>Total</th>
-      <th *ngIf="!order.poApproved" style="text-align: center">Remove</th>
+      <th style="text-align: center">Status</th>
       </thead>
       <tbody>
       <tr *ngFor="let orderDetail of orderDetails;let i = index">
@@ -51,8 +48,11 @@
         <td>{{orderDetail.soUnitPrice | number : '1.2-2'}}</td>
         <td>{{orderDetail.poQuantity}}</td>
         <td>{{orderDetail.soQuantity}}</td>
-        <td>{{(orderDetail.soUnitPrice * orderDetail.soQuantity) | number : '1.2-2'}}</td>
-        <td *ngIf="!order.poApproved" style="text-align: center" (click)="removeItem(orderDetail.id,i)">
+        <td>{{(orderDetail.poUnitPrice * orderDetail.poQuantity) | number : '1.2-2'}}</td>
+        <td style="text-align: center" *ngIf="orderDetail.status==='Complete'">
+          <i class="fa fa-check"></i>
+        </td>
+        <td style="text-align: center" *ngIf="orderDetail.status==='Incomplete'">
           <i class="fa fa-times"></i>
         </td>
       </tr>
@@ -68,31 +68,30 @@
   </div>
 
   <div style="text-align: right">
-    <span style="font-weight: bold">R.Total : </span>
-    <span>{{totalR | number : '1.2-2'}}</span>
-  </div>
-
-  <div style="text-align: right">
-    <span style="font-weight: bold">N.Total : </span>
-    <span>{{totalN | number : '1.2-2'}}</span>
+    <span style="font-weight: bold">Total : </span>
+    <span>{{total | number : '1.2-2'}}</span>
   </div>
 
   <div style="margin-top: 20px">
-    <div style="font-weight: bold">Delivery Information</div>
+    <div style="font-weight: bold">Notes</div>
     <div>
-      <textarea [readonly]="order.poApproved" class="form-control" cols="30" rows="4">{{order.deliverNote}}</textarea>
+      <textarea readonly class="form-control" cols="30" rows="4" [(ngModel)]="order.deliverNote"></textarea>
     </div>
   </div>
 
-  <div style="margin-top: 20px;text-align: right" *ngIf="!order.poApproved">
-    <button class="btn btn-success" style="margin-right: 10px" (click)="approvePR()">Approve PR</button>
-    <button class="btn btn-danger" (click)="isTrueOrFalseDetailsRej(true)">Reject PR</button>
-  </div>
-  <div style="margin-top: 20px;text-align: right" *ngIf="order.poApproved">
-    <button class="btn btn-success" style="margin-right: 10px" (click)="viewSuppliers()">View Suppliers</button>
+  <div style="margin-top: 20px">
+    <div style="font-weight: bold">Handling Instructions</div>
+    <div>
+      <textarea readonly class="form-control" cols="30" rows="4" [(ngModel)]="order.handlingInstruction"></textarea>
+    </div>
   </div>
 
+  <!--<div style="margin-top: 20px;text-align: right">-->
+  <!--<button class="btn btn-success" style="margin-right: 10px" (click)="editPR()">Edit PR</button>-->
+  <!--</div>-->
+
 </div>
+
 
 <div class="modalTable" *ngIf="isModalTableDetails.openTable">
   <div (click)="isTrueOrFalseDetails(false)"></div>
@@ -138,30 +137,6 @@
       </div>
       <div style="text-align: right">
         <button class="btn btn-success" (click)="addItem()">Add Item</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modalTable" *ngIf="isModalTableDetailsRej.openTable">
-  <div (click)="isTrueOrFalseDetailsRej(false)"></div>
-  <div>
-    <div class="selectChild"
-         style="max-height: calc(100vh - 60px);overflow-y: hidden;margin-left: 60px;margin-right: 10px;margin-top: 100px;">
-      <div style="position: absolute;z-index: 99;right: 10px;top: 10px;">
-        <i class="fas fa-times" style="cursor: pointer" (click)="isTrueOrFalseDetailsRej(false)"></i>
-      </div>
-
-      <div class="row" style="padding: 40px">
-        <div class="col-12" style="margin-top: 20px">
-          <div style="font-weight: bold">Reject PR Reason</div>
-          <div>
-            <textarea class="form-control" cols="30" rows="3">{{order.deliverNote}}</textarea>
-          </div>
-        </div>
-      </div>
-      <div style="text-align: right">
-        <button class="btn btn-danger">Reject PR</button>
       </div>
     </div>
   </div>

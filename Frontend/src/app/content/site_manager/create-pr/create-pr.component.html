@@ -50,32 +50,22 @@
       <tbody>
       <tr *ngFor="let orderDetail of orderDetails;let i = index">
         <td>
-          <input type="text" [(ngModel)]="orderDetail.id">
+          {{orderDetail.id}}
         </td>
         <td>
-          <input type="text" [(ngModel)]="orderDetail.material.itemName">
+          {{orderDetail.material.itemName}}
         </td>
         <td>
-          <input type="text" [(ngModel)]="orderDetail.material.itemType">
+          {{orderDetail.material.itemType}}
         </td>
         <td>
-          <input type="number" [(ngModel)]="orderDetail.poUnitPrice">
+          {{orderDetail.poUnitPrice}}
         </td>
         <td>
-          <input type="number" [(ngModel)]="orderDetail.poQuantity">
+          {{orderDetail.poQuantity}}
         </td>
-        <!--<td>{{orderDetail.soUnitPrice | number : '1.2-2'}}</td>-->
-        <!--<td>{{orderDetail.soQuantity}}</td>-->
         <td>{{(orderDetail.poUnitPrice * orderDetail.poQuantity) | number : '1.2-2'}}</td>
-        <td style="text-align: center"><i class="fa fa-times"></i></td>
-        <!--<td style="text-align: center" *ngIf="orderDetail.status==='Complete'"-->
-        <!--(click)="orderDetail.status='Incomplete'">-->
-        <!--<i class="fa fa-check"></i>-->
-        <!--</td>-->
-        <!--<td style="text-align: center" *ngIf="orderDetail.status==='Incomplete'"-->
-        <!--(click)="orderDetail.status='Complete'">-->
-        <!--<i class="fa fa-times"></i>-->
-        <!--</td>-->
+        <td style="text-align: center"><i class="fa fa-times" (click)="removeItem(i)"></i></td>
       </tr>
       <!--<tr *ngFor="let pump of orders;let i = index">-->
       <!--<td>{{i+1}}</td>-->

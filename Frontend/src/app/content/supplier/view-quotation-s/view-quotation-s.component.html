@@ -17,22 +17,27 @@
 
 <div class="row" style="border-top: 1px solid #aeaeae;margin: 10px">
   <div class="col-12">
-
-    <table class="table" width="100%" style="margin-top: 20px" border="1px solid black">
+    <div style="margin-top: 10px;text-align: right">
+      <span style="font-weight: bold">R. -</span> Requested,
+      <span style="font-weight: bold"> N. -</span> New
+    </div>
+    <table class="table" width="100%" border="1px solid black">
       <thead class="thead-dark">
       <th>Order Reference</th>
       <th>Buyer</th>
       <th>Quantity</th>
-      <th>Total</th>
+      <th>R.Total</th>
+      <th>N.Total</th>
       <th>Status</th>
-      <th style="text-align: center">Order Details</th>
+      <th style="text-align: center">Quotation Details</th>
       </thead>
       <tbody>
       <tr *ngFor="let order of orders;let i = index">
         <td>PO{{order.id}}</td>
         <td>{{order.siteManager.company.companyName}}</td>
         <td>{{order.purchaseOrderDetailList.length}}</td>
-        <td>{{order.poTotal | number : '1.2-2'}}</td>
+        <td>{{calcTotalP(order) | number : '1.2-2'}}</td>
+        <td>{{calcTotalS(order) | number : '1.2-2'}}</td>
         <td>{{order.poAccepted?order.poFinalized?'Finalized':'Accepted':'Pending'}}</td>
         <td style="text-align: center">
           <i class="fa fa-arrow-right" (click)="viewPO(order)"></i></td>

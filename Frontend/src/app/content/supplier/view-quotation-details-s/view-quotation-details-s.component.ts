@@ -83,15 +83,19 @@ export class ViewQuotationDetailsSComponent implements OnInit {
     this.order.purchaseOrderDetails = purchaseOrderDetails
     this.supplierService.finalizeQuotation(this.order).subscribe(() => {
       this.order.poFinalized = true;
+      this.router.navigate(['/view_quotations_s'])
     })
   }
 
+  totalR = 0
+  totalN = 0
   calcTotal() {
-    this.total = 0
+    this.totalR = 0
+    this.totalN = 0
     for (let orderDetail of this.orderDetails) {
-      this.total += (orderDetail.soUnitPrice * orderDetail.soQuantity)
+      this.totalR += (orderDetail.poUnitPrice * orderDetail.poQuantity)
+      this.totalN += (orderDetail.soUnitPrice * orderDetail.soQuantity)
     }
-    this.supplierService.order.poTotal = this.total
   }
 
 }

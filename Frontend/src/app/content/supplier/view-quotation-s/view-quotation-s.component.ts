@@ -60,6 +60,21 @@ export class ViewQuotationSComponent implements OnInit {
     })
   }
 
+  calcTotalP(order) {
+    let total = 0
+    for (let orderDetail of order.purchaseOrderDetailList) {
+      total += (orderDetail.poUnitPrice * orderDetail.poQuantity)
+    }
+    return total;
+  }
+
+  calcTotalS(order) {
+    let total = 0
+    for (let orderDetail of order.purchaseOrderDetailList) {
+      total += (orderDetail.soUnitPrice * orderDetail.soQuantity)
+    }
+    return total;
+  }
   // isTrueOrFalseDetails(reply) {
   //   this.isModalTableDetails.openTable = reply;
   // }

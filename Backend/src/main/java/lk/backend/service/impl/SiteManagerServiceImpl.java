@@ -20,6 +20,8 @@ public class SiteManagerServiceImpl implements SiteManagerService {
     private MaterialRepository materialRepository;
     @Autowired
     private PurchaseOrderRepository purchaseOrderRepository;
+    @Autowired
+    private PurchaseOrderDetailRepository purchaseOrderDetailRepository;
 
     @Override
     public Material addItem(Material material) {
@@ -58,6 +60,7 @@ public class SiteManagerServiceImpl implements SiteManagerService {
         List<PurchaseOrder> purchaseOrderListDTOs = new ArrayList<>();
         for (PurchaseOrder purchaseOrder : purchaseOrderList) {
             PurchaseOrder purchaseOrderObj = new PurchaseOrder(purchaseOrder);
+            purchaseOrderObj.setSupplier(purchaseOrder.getSupplier());
             List<PurchaseOrderDetail> purchaseOrderDetails = new ArrayList<>();
             for (PurchaseOrderDetail purchaseOrderDetail : purchaseOrder.getPurchaseOrderDetails()) {
                 purchaseOrderDetails.add(new PurchaseOrderDetail(purchaseOrderDetail));
@@ -66,5 +69,11 @@ public class SiteManagerServiceImpl implements SiteManagerService {
             purchaseOrderListDTOs.add(purchaseOrderObj);
         }
         return purchaseOrderListDTOs;
+    }
+
+    @Override
+    public boolean removeItem(String id) {
+        purchaseOrderDetailRepository.deleteById(id);
+        return true;
     }
 }

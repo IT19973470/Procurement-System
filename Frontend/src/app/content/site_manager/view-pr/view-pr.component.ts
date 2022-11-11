@@ -39,4 +39,20 @@ export class ViewPrComponent implements OnInit {
     this.siteManagerService.order = order
     this.router.navigate(['/view_pr_details'])
   }
+
+  calcTotalP(order) {
+    let total = 0
+    for (let orderDetail of order.purchaseOrderDetailList) {
+      total += (orderDetail.poUnitPrice * orderDetail.poQuantity)
+    }
+    return total;
+  }
+
+  calcTotalS(order) {
+    let total = 0
+    for (let orderDetail of order.purchaseOrderDetailList) {
+      total += (orderDetail.soUnitPrice * orderDetail.soQuantity)
+    }
+    return total;
+  }
 }

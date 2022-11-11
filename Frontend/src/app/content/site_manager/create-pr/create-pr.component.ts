@@ -75,9 +75,9 @@ export class CreatePrComponent implements OnInit {
     this.isModalTableDetails.openTable = reply;
   }
 
-  isTrueOrFalseDetailsRej(reply) {
-    this.isModalTableDetailsRej.openTable = reply;
-  }
+  // isTrueOrFalseDetailsRej(reply) {
+  //   this.isModalTableDetailsRej.openTable = reply;
+  // }
 
   item
 
@@ -113,4 +113,7 @@ export class CreatePrComponent implements OnInit {
     })
   }
 
+  removeItem(index) {
+    this.orderDetails.splice(index, 1)
+  }
 }

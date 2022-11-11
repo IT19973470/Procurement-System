@@ -23,47 +23,38 @@
     <div style="text-align: right">
       <button class="btn btn-warning" (click)="isTrueOrFalseDetails(true)" style="margin-top: 20px">Add Item</button>
     </div>
-    <table class="table" width="100%" border="1px solid black" style="margin-top: 20px">
+    <div style="margin-top: 10px;text-align: right">
+      <span style="font-weight: bold">R. -</span> Requested,
+      <span style="font-weight: bold"> N. -</span> New
+    </div>
+    <table class="table" width="100%" border="1px solid black">
       <thead class="thead-dark">
       <th>Item No</th>
       <th>Item Name</th>
       <th>Item Type</th>
-      <th>Unit Price</th>
-      <!--<th>N.Unit Price</th>-->
-      <th>Quantity</th>
-      <!--<th>N.Quantity</th>-->
+      <th>R.Unit Price</th>
+      <th>N.Unit Price</th>
+      <th>R.Quantity</th>
+      <th>N.Quantity</th>
       <th>Total</th>
-      <th style="text-align: center">Remove</th>
+      <th style="text-align: center">Status</th>
       </thead>
       <tbody>
       <tr *ngFor="let orderDetail of orderDetails;let i = index">
-        <td>
-          <input type="text" [(ngModel)]="orderDetail.id">
-        </td>
-        <td>
-          <input type="text" [(ngModel)]="orderDetail.material.itemName">
-        </td>
-        <td>
-          <input type="text" [(ngModel)]="orderDetail.material.itemType">
-        </td>
-        <td>
-          <input type="number" [(ngModel)]="orderDetail.poUnitPrice">
-        </td>
-        <td>
-          <input type="number" [(ngModel)]="orderDetail.poQuantity">
-        </td>
-        <!--<td>{{orderDetail.soUnitPrice | number : '1.2-2'}}</td>-->
-        <!--<td>{{orderDetail.soQuantity}}</td>-->
+        <td>{{orderDetail.id}}</td>
+        <td>{{orderDetail.material.itemName}}</td>
+        <td>{{orderDetail.material.itemType}}</td>
+        <td>{{orderDetail.poUnitPrice | number : '1.2-2'}}</td>
+        <td>{{orderDetail.soUnitPrice | number : '1.2-2'}}</td>
+        <td>{{orderDetail.poQuantity}}</td>
+        <td>{{orderDetail.soQuantity}}</td>
         <td>{{(orderDetail.poUnitPrice * orderDetail.poQuantity) | number : '1.2-2'}}</td>
-        <td style="text-align: center"><i class="fa fa-times"></i></td>
-        <!--<td style="text-align: center" *ngIf="orderDetail.status==='Complete'"-->
-        <!--(click)="orderDetail.status='Incomplete'">-->
-        <!--<i class="fa fa-check"></i>-->
-        <!--</td>-->
-        <!--<td style="text-align: center" *ngIf="orderDetail.status==='Incomplete'"-->
-        <!--(click)="orderDetail.status='Complete'">-->
-        <!--<i class="fa fa-times"></i>-->
-        <!--</td>-->
+        <td style="text-align: center" *ngIf="orderDetail.status==='Complete'">
+          <i class="fa fa-check"></i>
+        </td>
+        <td style="text-align: center" *ngIf="orderDetail.status==='Incomplete'">
+          <i class="fa fa-times"></i>
+        </td>
       </tr>
       <!--<tr *ngFor="let pump of orders;let i = index">-->
       <!--<td>{{i+1}}</td>-->
@@ -79,6 +70,20 @@
   <div style="text-align: right">
     <span style="font-weight: bold">Total : </span>
     <span>{{total | number : '1.2-2'}}</span>
+  </div>
+
+  <div style="margin-top: 20px">
+    <div style="font-weight: bold">Notes</div>
+    <div>
+      <textarea readonly class="form-control" cols="30" rows="4" [(ngModel)]="order.deliverNote"></textarea>
+    </div>
+  </div>
+
+  <div style="margin-top: 20px">
+    <div style="font-weight: bold">Handling Instructions</div>
+    <div>
+      <textarea readonly class="form-control" cols="30" rows="4" [(ngModel)]="order.handlingInstruction"></textarea>
+    </div>
   </div>
 
   <!--<div style="margin-top: 20px;text-align: right">-->

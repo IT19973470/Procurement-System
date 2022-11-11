@@ -33,6 +33,7 @@ public class ProcumentOfficerServiceImpl implements ProcumentOfficerService {
 
     @Override
     public PurchaseOrderDetail updatePR(PurchaseOrderDetail purchaseOrderDetail) {
+        purchaseOrderDetail.setStatus("Incomplete");
         purchaseOrderDetail = purchaseOrderDetailRepository.save(purchaseOrderDetail);
         return new PurchaseOrderDetail(purchaseOrderDetail);
 //        Optional<PurchaseOrder> orderOptional = purchaseOrderRepository.findById(orderId);
@@ -98,7 +99,9 @@ public class ProcumentOfficerServiceImpl implements ProcumentOfficerService {
         List<AppUser> appUsers = new ArrayList<>();
         List<Quotation> quotationList = quotationRepository.getAllByPurchaseOrderId(poId);
         for (Quotation quotation : quotationList) {
-            appUsers.add(quotation.getSupplier());
+            AppUser supplier = quotation.getSupplier();
+            supplier.setPurchaseOrderDetailList(quotationDetails(poId, supplier.getId()));
+            appUsers.add(supplier);
         }
         return appUsers;
     }

@@ -1,7 +1,6 @@
-// @ts-nocheck
-import { Component, OnInit } from '@angular/core';
-import {ProcumentOfficerService} from "../../../../../../Frontend/src/app/_service/procument-officer.service";
-import {SiteManagerService} from "../../../../../../Frontend/src/app/_service/site-manager.service";
+import {Component, OnInit} from '@angular/core';
+import {SiteManagerService} from "../site-manager.service";
+import {ProcumentOfficerService} from "../procument-officer.service";
 
 @Component({
   selector: 'app-manage-material',
@@ -45,4 +44,7 @@ export class ManageMaterialComponent implements OnInit {
     })
   }
 
+  removeItem(index) {
+
+  }
 }

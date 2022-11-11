@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Component } from '@angular/core';
 
 @Component({
@@ -8,4 +9,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'procument-system';
 
+  getUser() {
+    return JSON.parse(localStorage.getItem('user'))
+  }
 }

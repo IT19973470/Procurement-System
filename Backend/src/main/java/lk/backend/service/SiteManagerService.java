@@ -16,4 +16,5 @@ public interface SiteManagerService {
 
     List<PurchaseOrder> getPRs();
 
+    boolean removeItem(String id);
 }

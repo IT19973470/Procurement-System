@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
+import java.util.List;
 
 @Entity
 @Getter
@@ -29,6 +30,8 @@ public class AppUser implements IDCreator {
     private String contactNumber;
     @ManyToOne
     private Company company;
+    @Transient
+    private List<PurchaseOrderDetail> purchaseOrderDetailList;
 
     public AppUser(AppUser appUser) {
         this.id = appUser.id;

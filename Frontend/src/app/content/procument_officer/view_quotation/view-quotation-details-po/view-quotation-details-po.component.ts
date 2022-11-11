@@ -62,22 +62,27 @@ export class ViewQuotationDetailsPoComponent implements OnInit {
   getSupplierOrderDetails() {
     this.order = this.procumentOfficerService.order
     this.supplier = this.procumentOfficerService.supplier
-    this.procumentOfficerService.quotationDetails(this.order.id, this.supplier.id).subscribe(orderDetails => {
-      this.orderDetails = orderDetails
-      this.calcTotal()
-    })
+    this.orderDetails = this.procumentOfficerService.supplier.purchaseOrderDetailList
+    // this.procumentOfficerService.quotationDetails(this.order.id, this.supplier.id).subscribe(orderDetails => {
+    //   this.orderDetails = orderDetails
+    this.calcTotal()
+    // })
     // for (let orderDetail of this.orderDetails) {
     //   orderDetail.r_unitPrice = orderDetail.unitPrice
     //   orderDetail.r_quantity = orderDetail.quantity
     // }
   }
 
+  totalR = 0
+  totalN = 0
+
   calcTotal() {
-    this.total = 0
+    this.totalR = 0
+    this.totalN = 0
     for (let orderDetail of this.orderDetails) {
-      this.total += (orderDetail.soUnitPrice * orderDetail.soQuantity)
+      this.totalR += (orderDetail.poUnitPrice * orderDetail.poQuantity)
+      this.totalN += (orderDetail.soUnitPrice * orderDetail.soQuantity)
     }
-    // this.wareHouseService.order.poTotal = this.total
   }
 
   isTrueOrFalseDetails(reply) {

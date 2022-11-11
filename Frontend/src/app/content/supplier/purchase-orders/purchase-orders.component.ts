@@ -61,6 +61,14 @@ export class PurchaseOrdersComponent implements OnInit {
     })
   }
 
+  calcTotalS(order) {
+    let total = 0
+    for (let orderDetail of order.purchaseOrderDetailList) {
+      total += (orderDetail.soUnitPrice * orderDetail.soQuantity)
+    }
+    return total;
+  }
+
   // isTrueOrFalseDetails(reply) {
   //   this.isModalTableDetails.openTable = reply;
   // }
