@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {environment} from "../../../environments/environment";
@@ -36,6 +36,10 @@ export class SiteManagerService {
 
   removeItem(id): Observable<any> {
     return this.http.delete<any>(environment.backend_url + '/site_manager/removeItem/' + id);
+  }
+
+  removeMaterial(id): Observable<any> {
+    return this.http.delete<any>(environment.backend_url + '/site_manager/removeMaterial/' + id);
   }
 
   newOrder() {

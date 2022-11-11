@@ -7,11 +7,6 @@
 						Login to continue
 					</span>
 
-
-        <!--<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">-->
-        <!--<span class="focus-input100"></span>-->
-        <!--<span class="label-input100">Email</span>-->
-        <!--</div>-->
         <input class="form-control" type="text" name="email" placeholder="Email or Contact" [(ngModel)]="user.email"
                style="padding: 30px 20px 30px 20px;background-color: #F7F7F7" #email="ngModel" required appLoginValidator>
         <div *ngIf="(email.touched || loginForm.submitted) && email.errors?.required"
@@ -59,25 +54,10 @@
 
         <div class="text-center p-t-46 p-b-20">
 						<span class="txt2" [routerLink]="'/register'" style="cursor: pointer">
-							sign up customer / fuel station
+							sign up
 						</span>
         </div>
 
-        <div class="text-center p-t-46 p-b-20" style="padding-top: 0px">
-						<span class="txt2" [routerLink]="'/register_fuel_admin'" style="cursor: pointer">
-							sign up fuel admin
-						</span>
-        </div>
-
-        <!--<div class="login100-form-social flex-c-m">-->
-        <!--<a href="#" class="login100-form-social-item flex-c-m bg1 m-r-5">-->
-        <!--<i class="fa fa-facebook-f" aria-hidden="true"></i>-->
-        <!--</a>-->
-
-        <!--<a href="#" class="login100-form-social-item flex-c-m bg2 m-r-5">-->
-        <!--<i class="fa fa-twitter" aria-hidden="true"></i>-->
-        <!--</a>-->
-        <!--</div>-->
       </form>
 
       <div class="login100-more" style="background-image: url('./assets/fuel.jpg');"></div>

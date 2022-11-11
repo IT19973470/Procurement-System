@@ -4,7 +4,9 @@
     <i class="fa fa-arrow-left" style="font-size: 30px" [routerLink]="'/supplier_orders'"></i>
   </div>
   <div style="margin-top: 20px;display: flex">
-    <div style="font-weight: bold;color: #b68003;font-size: 21px;width: calc(100% - 250px)">Order Details (Warehouse Manager)</div>
+    <div style="font-weight: bold;color: #b68003;font-size: 21px;width: calc(100% - 250px)">Order Details (Warehouse
+      Manager)
+    </div>
     <div style="width: 250px;display: flex">
       <input type="text" class="form-control" style="border-radius: 20px" placeholder="Search">
       <i class="fa fa-search" style="font-size: 20px;padding: 10px 10px 10px 15px"></i>
@@ -73,17 +75,14 @@
 
   <div style="margin-top: 20px">
     <span style="font-weight: bold">Rate the supplier : </span>
-    <span style="color: #e88a03;font-size: 20px">
-      <i class="fa fa-star"></i>
-      <i class="fa fa-star"></i>
-      <i class="fa fa-star"></i>
-      <i class="fa fa-star"></i>
-      <i class="fa fa-star"></i>
+    <span>
+      <i class="fa fa-star" style="color: #e88a03;font-size: 20px" *ngFor="let rate of rates1;let i=index" (click)="makeRate1(i)"></i>
+      <i class="fa fa-star" style="color: #e8cd8a;font-size: 20px" *ngFor="let rate of rates2;let i=index" (click)="makeRate2(i)"></i>
     </span>
   </div>
 
   <div style="margin-top: 20px;text-align: right">
-    <button class="btn btn-success">Finalize Supplier Order</button>
+    <button class="btn btn-success" (click)="finalizeSupplierOrder()">Finalize Supplier Order</button>
   </div>
 
 </div>

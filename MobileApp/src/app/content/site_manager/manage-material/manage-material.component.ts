@@ -44,7 +44,9 @@ export class ManageMaterialComponent implements OnInit {
     })
   }
 
-  removeItem(index) {
-
+  removeItem(id, index) {
+    this.siteManagerService.removeMaterial(id).subscribe(() => {
+      this.items.splice(index, 1)
+    })
   }
 }

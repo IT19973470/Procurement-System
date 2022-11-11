@@ -36,6 +36,8 @@ export class LoginComponent implements OnInit {
       } else {
 
       }
+    },error => {
+      console.log(JSON.stringify(error))
     });
   }
 

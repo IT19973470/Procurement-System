@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {SiteManagerService} from "../site-manager.service";
 import {Router} from "@angular/router";
+import {ProcumentOfficerService} from "../procument-officer.service";
 
 @Component({
   selector: 'app-view-pr',
@@ -17,7 +18,7 @@ export class ViewPrComponent implements OnInit {
     foundLetter: ''
   };
 
-  constructor(private siteManagerService: SiteManagerService, private router: Router) {
+  constructor(private procumentOfficerService: ProcumentOfficerService, private siteManagerService: SiteManagerService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -55,5 +56,6 @@ export class ViewPrComponent implements OnInit {
     }
     return total;
   }
+
 
 }

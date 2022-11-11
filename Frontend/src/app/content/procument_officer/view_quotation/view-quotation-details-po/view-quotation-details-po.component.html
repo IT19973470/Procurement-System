@@ -37,6 +37,7 @@
       <th>R.Quantity</th>
       <th>N.Quantity</th>
       <th>Total</th>
+      <th>Status</th>
       </thead>
       <tbody>
       <tr *ngFor="let orderDetail of orderDetails;let i = index">
@@ -48,6 +49,12 @@
         <td>{{orderDetail.poQuantity}}</td>
         <td>{{orderDetail.soQuantity}}</td>
         <td>{{(orderDetail.soUnitPrice * orderDetail.soQuantity) | number : '1.2-2'}}</td>
+        <td style="text-align: center" *ngIf="orderDetail.status==='Complete'">
+          <i class="fa fa-check"></i>
+        </td>
+        <td style="text-align: center" *ngIf="orderDetail.status==='Incomplete'">
+          <i class="fa fa-times"></i>
+        </td>
       </tr>
       <!--<tr *ngFor="let pump of orders;let i = index">-->
       <!--<td>{{i+1}}</td>-->

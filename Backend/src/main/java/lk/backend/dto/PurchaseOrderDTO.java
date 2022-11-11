@@ -1,5 +1,10 @@
 package lk.backend.dto;
 
+import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.Set;
 import lk.backend.entity.AppUser;
 import lk.backend.entity.PurchaseOrder;
 import lk.backend.entity.PurchaseOrderDetail;
@@ -8,12 +13,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import javax.persistence.*;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -60,7 +59,6 @@ public class PurchaseOrderDTO implements IDCreator {
         this.deliverNote = purchaseOrder.deliverNote;
         this.poAccepted = purchaseOrder.poAccepted;
         this.addedAt = purchaseOrder.addedAt;
-//        this.addedAtFormatted= purchaseOrder.addedAtFormatted;
         this.siteName = purchaseOrder.siteName;
         this.priority = purchaseOrder.priority;
         this.note = purchaseOrder.note;

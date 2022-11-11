@@ -1,15 +1,16 @@
 package lk.backend.service.impl;
 
-import lk.backend.entity.*;
-import lk.backend.repository.*;
-import lk.backend.service.ProcumentOfficerService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import lk.backend.entity.*;
+import lk.backend.repository.*;
+import lk.backend.service.ProcumentOfficerService;
+import lk.backend.service.factory.OrderFactory;
+import lk.backend.util.CommonConstants;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class ProcumentOfficerServiceImpl implements ProcumentOfficerService {
@@ -22,41 +23,34 @@ public class ProcumentOfficerServiceImpl implements ProcumentOfficerService {
     private UserRepository userRepository;
     @Autowired
     private QuotationRepository quotationRepository;
-    @Autowired
-    private QuotationDetailRepository quotationDetailRepository;
+    private OrderFactory orderFactory = OrderFactory.getOrderFactory();
 
     @Override
     public boolean removePR(String itemId) {
-        purchaseOrderDetailRepository.deleteById(itemId);
-        return true;
+        return orderFactory.getOrderObj(CommonConstants.PURCHASE_ORDER).removePR(purchaseOrderDetailRepository, itemId);
+//        purchaseOrderDetailRepository.deleteById(itemId);
+//        return true;
     }
 
     @Override
     public PurchaseOrderDetail updatePR(PurchaseOrderDetail purchaseOrderDetail) {
-        purchaseOrderDetail.setStatus("Incomplete");
-        purchaseOrderDetail = purchaseOrderDetailRepository.save(purchaseOrderDetail);
-        return new PurchaseOrderDetail(purchaseOrderDetail);
-//        Optional<PurchaseOrder> orderOptional = purchaseOrderRepository.findById(orderId);
-//        if(orderOptional.isPresent()){
-//            PurchaseOrder purchaseOrder = orderOptional.get();
-//            purchaseOrderDetail.setId("PD" + purchaseOrder.getId());
-//            purchaseOrder.getPurchaseOrderDetails().add(purchaseOrderDetail);
-//            purchaseOrderR
-//            return new PurchaseOrderDetail(purchaseOrderDetail);
-//        }
-//        return null;
+        return orderFactory.getOrderObj(CommonConstants.PURCHASE_ORDER).updatePR(purchaseOrderDetailRepository, purchaseOrderDetail);
+//        purchaseOrderDetail.setStatus("Incomplete");
+//        purchaseOrderDetail = purchaseOrderDetailRepository.save(purchaseOrderDetail);
+//        return new PurchaseOrderDetail(purchaseOrderDetail);
     }
 
     @Override
     public boolean approveOrder(String orderId) {
-        Optional<PurchaseOrder> orderOptional = purchaseOrderRepository.findById(orderId);
-        if (orderOptional.isPresent()) {
-            PurchaseOrder purchaseOrder = orderOptional.get();
-            purchaseOrder.setPoApproved(true);
-            purchaseOrderRepository.save(purchaseOrder);
-            return true;
-        }
-        return false;
+        return orderFactory.getOrderObj(CommonConstants.PURCHASE_ORDER).approveOrder(purchaseOrderRepository, orderId);
+//        Optional<PurchaseOrder> orderOptional = purchaseOrderRepository.findById(orderId);
+//        if (orderOptional.isPresent()) {
+//            PurchaseOrder purchaseOrder = orderOptional.get();
+//            purchaseOrder.setPoApproved(true);
+//            purchaseOrderRepository.save(purchaseOrder);
+//            return true;
+//        }
+//        return false;
     }
 
     @Override
@@ -78,6 +72,7 @@ public class ProcumentOfficerServiceImpl implements ProcumentOfficerService {
             quotationDetail.setQuotation(quotation);
             quotationDetail.setSoUnitPrice(purchaseOrderDetail.getSoUnitPrice());
             quotationDetail.setSoQuantity(purchaseOrderDetail.getSoQuantity());
+            quotationDetail.setStatus("Incomplete");
             quotation.getQuotationDetails().add(quotationDetail);
         }
         quotationRepository.save(quotation);
@@ -114,6 +109,7 @@ public class ProcumentOfficerServiceImpl implements ProcumentOfficerService {
             PurchaseOrderDetail purchaseOrderDetail = quotationDetail.getPurchaseOrderDetail();
             purchaseOrderDetail.setSoUnitPrice(quotationDetail.getSoUnitPrice());
             purchaseOrderDetail.setSoQuantity(quotationDetail.getSoQuantity());
+            purchaseOrderDetail.setStatus(quotationDetail.getStatus());
             purchaseOrderDetails.add(new PurchaseOrderDetail(purchaseOrderDetail));
         }
         return purchaseOrderDetails;
@@ -125,17 +121,34 @@ public class ProcumentOfficerServiceImpl implements ProcumentOfficerService {
         Quotation quotation = quotationRepository.getAllByPurchaseOrderIdAndSupplierId(poId, supplierId);
         if (orderOptional.isPresent()) {
             PurchaseOrder purchaseOrder = orderOptional.get();
+            purchaseOrder.setPoStatus("Finalized");
             purchaseOrder.setSupplier(userRepository.findById(supplierId).get());
             for (PurchaseOrderDetail purchaseOrderDetail : purchaseOrder.getPurchaseOrderDetails()) {
                 for (QuotationDetail quotationDetail : quotation.getQuotationDetails()) {
                     if (quotationDetail.getPurchaseOrderDetail().getId().equals(purchaseOrderDetail.getId())) {
                         purchaseOrderDetail.setSoUnitPrice(quotationDetail.getSoUnitPrice());
                         purchaseOrderDetail.setSoQuantity(quotationDetail.getSoQuantity());
+                        purchaseOrderDetail.setStatus(quotationDetail.getStatus());
                     }
                 }
             }
             purchaseOrderRepository.save(purchaseOrder);
         }
         return true;
+    }
+
+    @Override
+    public boolean removePurchaseOrder(String orderId) {
+        return orderFactory.getOrderObj(CommonConstants.PURCHASE_ORDER).removePurchaseOrder(purchaseOrderRepository, orderId);
+    }
+
+    @Override
+    public boolean rejectPurchaseOrder(String orderId) {
+        return orderFactory.getOrderObj(CommonConstants.PURCHASE_ORDER).rejectPurchaseOrder(purchaseOrderRepository, orderId);
+    }
+
+    @Override
+    public boolean payOrder(String orderId) {
+        return orderFactory.getOrderObj(CommonConstants.PURCHASE_ORDER).payOrder(purchaseOrderRepository, orderId);
     }
 }

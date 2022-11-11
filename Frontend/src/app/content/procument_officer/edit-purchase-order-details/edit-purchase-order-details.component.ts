@@ -142,4 +142,20 @@ export class EditPurchaseOrderDetailsComponent implements OnInit {
       this.orderDetails.splice(index, 1);
     })
   }
+
+  rejectPR() {
+    this.siteManagerService.rejectPurchaseOrder(this.order.id).subscribe(() => {
+      this.router.navigate(['/edit_purchase_orders'])
+    })
+  }
+
+  editInfo() {
+    this.siteManagerService.editInfo(this.order).subscribe()
+  }
+
+  payOrder() {
+    this.procumentOfficerService.payOrder(this.order.id).subscribe(() => {
+      this.router.navigate(['/edit_purchase_orders'])
+    })
+  }
 }

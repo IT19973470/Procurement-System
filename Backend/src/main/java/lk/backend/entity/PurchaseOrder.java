@@ -1,16 +1,15 @@
 package lk.backend.entity;
 
+import javax.persistence.*;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Set;
+
 import lk.backend.util.IDCreator;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import javax.persistence.*;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
-import java.util.Set;
 
 @Entity
 @Getter
@@ -54,6 +53,7 @@ public class PurchaseOrder implements IDCreator {
     private int priority;
     private String note;
     private String handlingInstruction;
+    private int supplierRate;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "purchaseOrder")
     private Set<PurchaseOrderDetail> purchaseOrderDetails;
@@ -73,11 +73,11 @@ public class PurchaseOrder implements IDCreator {
         this.poAccepted = purchaseOrder.poAccepted;
         this.poApproved = purchaseOrder.poApproved;
         this.addedAt = purchaseOrder.addedAt;
-//        this.addedAtFormatted= purchaseOrder.addedAtFormatted;
         this.siteName = purchaseOrder.siteName;
         this.priority = purchaseOrder.priority;
         this.note = purchaseOrder.note;
         this.handlingInstruction = purchaseOrder.handlingInstruction;
+        this.supplierRate = purchaseOrder.supplierRate;
     }
 
     public PurchaseOrder(PurchaseOrder purchaseOrder, AppUser warehouseManager, AppUser supplier, AppUser siteManager) {

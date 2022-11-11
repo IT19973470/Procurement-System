@@ -51,6 +51,10 @@ export class SupplierService {
     return this.http.get<any>(environment.backend_url + '/supplier/getFinalizedPurchaseOrders/' + JSON.parse(localStorage.getItem('user')).id);
   }
 
+  deliverOrder(id): Observable<any> {
+    return this.http.get<any>(environment.backend_url + '/supplier/deliverOrder/' + id);
+  }
+
   newPurchaseOrder() {
     return {
       accepted: false,

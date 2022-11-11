@@ -17,4 +17,8 @@ export class WarehouseService {
   getFinalizedSupplierOrders(): Observable<any> {
     return this.http.get<any>(environment.backend_url + '/warehouse/getFinalizedSupplierOrders/' + JSON.parse(localStorage.getItem('user')).company.companyId);
   }
+
+  finalizeSupplierOrder(id, rate): Observable<any> {
+    return this.http.get<any>(environment.backend_url + '/warehouse/finalizeSupplierOrder/' + id + '/' + rate);
+  }
 }

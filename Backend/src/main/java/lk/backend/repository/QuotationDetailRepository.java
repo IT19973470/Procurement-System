@@ -1,6 +1,5 @@
 package lk.backend.repository;
 
-import lk.backend.entity.PurchaseOrderDetail;
 import lk.backend.entity.QuotationDetail;
 import org.springframework.data.jpa.repository.JpaRepository;
 

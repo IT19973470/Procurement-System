@@ -5,7 +5,6 @@ public class OrderFactory {
     private static OrderFactory orderFactory;
 
     private OrderFactory() {
-
     }
 
     public OrderService getOrderObj(String orderType) {

@@ -40,6 +40,7 @@
       <th>R.Quantity</th>
       <th>N.Quantity</th>
       <th>Total</th>
+      <th *ngIf="order.poApproved">Status</th>
       <th *ngIf="!order.poApproved" style="text-align: center">Remove</th>
       </thead>
       <tbody>
@@ -52,6 +53,12 @@
         <td>{{orderDetail.poQuantity}}</td>
         <td>{{orderDetail.soQuantity}}</td>
         <td>{{(orderDetail.soUnitPrice * orderDetail.soQuantity) | number : '1.2-2'}}</td>
+        <td style="text-align: center" *ngIf="order.poApproved && orderDetail.status==='Complete'">
+          <i class="fa fa-check"></i>
+        </td>
+        <td style="text-align: center" *ngIf="order.poApproved && orderDetail.status==='Incomplete'">
+          <i class="fa fa-times"></i>
+        </td>
         <td *ngIf="!order.poApproved" style="text-align: center" (click)="removeItem(orderDetail.id,i)">
           <i class="fa fa-times"></i>
         </td>
@@ -80,7 +87,11 @@
   <div style="margin-top: 20px">
     <div style="font-weight: bold">Delivery Information</div>
     <div>
-      <textarea [readonly]="order.poApproved" class="form-control" cols="30" rows="4">{{order.deliverNote}}</textarea>
+      <textarea [readonly]="order.poApproved" class="form-control" cols="30" rows="4"
+                [(ngModel)]="order.deliverNote"></textarea>
+      <button *ngIf="!order.poApproved" style="margin-top: 10px" class="btn btn-success" (click)="editInfo()">Edit
+        Information
+      </button>
     </div>
   </div>
 
@@ -89,7 +100,10 @@
     <button class="btn btn-danger" (click)="isTrueOrFalseDetailsRej(true)">Reject PR</button>
   </div>
   <div style="margin-top: 20px;text-align: right" *ngIf="order.poApproved">
-    <button class="btn btn-success" style="margin-right: 10px" (click)="viewSuppliers()">View Suppliers</button>
+    <button class="btn btn-warning" style="margin-right: 10px" (click)="viewSuppliers()">View Suppliers</button>
+    <button class="btn btn-success" style="margin-right: 10px" (click)="payOrder()" *ngIf="order.poStatus=='Delivered'">
+      Pay
+    </button>
   </div>
 
 </div>
@@ -161,7 +175,7 @@
         </div>
       </div>
       <div style="text-align: right">
-        <button class="btn btn-danger">Reject PR</button>
+        <button class="btn btn-danger" (click)="rejectPR()">Reject PR</button>
       </div>
     </div>
   </div>

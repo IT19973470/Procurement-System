@@ -1,13 +1,12 @@
 package lk.backend.service;
 
+import java.util.List;
 import lk.backend.entity.AppUser;
-import lk.backend.entity.Material;
 import lk.backend.entity.PurchaseOrder;
 import lk.backend.entity.PurchaseOrderDetail;
 
-import java.util.List;
-
 public interface ProcumentOfficerService {
+
     boolean removePR(String itemId);
 
     PurchaseOrderDetail updatePR(PurchaseOrderDetail purchaseOrderDetail);
@@ -25,4 +24,10 @@ public interface ProcumentOfficerService {
     List<PurchaseOrderDetail> quotationDetails(String poId, String supplierId);
 
     boolean finalizeSupplier(String poId, String supplierId);
+
+    boolean removePurchaseOrder(String orderId);
+
+    boolean rejectPurchaseOrder(String orderId);
+
+    boolean payOrder(String orderId);
 }

@@ -1,15 +1,14 @@
 package lk.backend.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 import lk.backend.util.IDCreator;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Transient;
 
 @Entity
 @Getter
@@ -36,8 +35,6 @@ public class PurchaseOrderDetail implements IDCreator {
 
     public PurchaseOrderDetail(PurchaseOrderDetail purchaseOrderDetail) {
         this.id = purchaseOrderDetail.id;
-//        this.itemName = purchaseOrderDetail.itemName;
-//        this.itemType = purchaseOrderDetail.itemType;
         this.material = purchaseOrderDetail.material;
         this.poUnitPrice = purchaseOrderDetail.poUnitPrice;
         this.poQuantity = purchaseOrderDetail.poQuantity;

@@ -48,6 +48,14 @@ export class ProcumentOfficerService {
     return this.http.get<any>(environment.backend_url + '/procument_officer/finalizeSupplier/' + poId + '/' + supplierId);
   }
 
+  removePurchaseOrder(poId) {
+    return this.http.get<any>(environment.backend_url + '/procument_officer/removePurchaseOrder/' + poId);
+  }
+
+  payOrder(id): Observable<any> {
+    return this.http.get<any>(environment.backend_url + '/procument_officer/payOrder/'+ id);
+  }
+
   newItem() {
     return {
       id: '',

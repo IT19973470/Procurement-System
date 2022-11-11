@@ -12,7 +12,7 @@ public class FinalizePurchaseOrder implements CommandOrder {
     }
 
     @Override
-    public PurchaseOrder finalizeOrder(PurchaseOrder purchaseOrder, String id) {
-        return supplierService.finalizePurchaseOrder(purchaseOrder, id);
+    public PurchaseOrder finalizeOrder(PurchaseOrder purchaseOrder, String id, int rating) {
+        return supplierService.finalizePurchaseOrder(purchaseOrder, id, rating);
     }
 }

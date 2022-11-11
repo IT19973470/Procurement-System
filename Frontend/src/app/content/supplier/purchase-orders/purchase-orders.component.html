@@ -33,7 +33,7 @@
         <td>{{order.siteManager.company.companyName}}</td>
         <td>{{order.purchaseOrderDetailList.length}}</td>
         <td>{{calcTotalS(order) | number : '1.2-2'}}</td>
-        <td>{{order.poAccepted?order.poFinalized?'Finalized':'Accepted':'Pending'}}</td>
+        <td>{{order.soStatus}}</td>
         <td style="text-align: center">
           <i class="fa fa-arrow-right" (click)="viewPO(order)"></i></td>
       </tr>

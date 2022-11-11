@@ -1,9 +1,9 @@
 <div class="row" style="margin-top: 75px;margin-left: 0px;margin-right: 0px">
-  <div style="margin-top: 20px">
+  <div style="margin-top: 0px">
     <i class="fa fa-arrow-left" style="font-size: 30px" [routerLink]="'/view_pr'"></i>
   </div>
-  <div style="margin-top: 20px;display: flex">
-    <div style="font-weight: bold;color: #b68003;font-size: 21px;width: calc(100% - 250px)">Order Details (Site Manager)</div>
+  <div style="margin-top: 10px;margin-bottom: 10px">
+    <div style="font-weight: bold;color: #b68003;font-size: 21px">Order Details (Site Manager)</div>
     <div style="width: 250px;display: flex">
       <input type="text" class="form-control" style="border-radius: 20px" placeholder="Search">
       <i class="fa fa-search" style="font-size: 20px;padding: 10px 10px 10px 15px"></i>
@@ -21,50 +21,97 @@
   <div class="col-12">
 
     <div style="text-align: right">
-      <button class="btn btn-warning" (click)="isTrueOrFalseDetails(true)" style="margin-top: 20px">Add Item</button>
+      <button class="btn btn-warning" (click)="isTrueOrFalseDetails(true)" style="margin-top: 20px;margin-bottom: 20px">Add Item</button>
     </div>
-    <div style="margin-top: 10px;text-align: right">
-      <span style="font-weight: bold">R. -</span> Requested,
-      <span style="font-weight: bold"> N. -</span> New
+    <!--<div style="margin-top: 10px;text-align: right">-->
+    <!--<span style="font-weight: bold">R. -</span> Requested,-->
+    <!--<span style="font-weight: bold"> N. -</span> New-->
+    <!--</div>-->
+    <div *ngFor="let orderDetail of orderDetails;let i = index"
+         style="border: 1px solid black;border-radius: 10px;margin-bottom: 10px;padding: 10px">
+      <div class="row">
+        <div class="col-6" style="font-weight: bold">
+          Item No
+        </div>
+        <div class="col-6">
+          {{orderDetail.id}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6" style="font-weight: bold">
+          Item Name
+        </div>
+        <div class="col-6">
+          {{orderDetail.material.itemName}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6" style="font-weight: bold">
+          Item Type
+        </div>
+        <div class="col-6">
+          {{orderDetail.material.itemType}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6" style="font-weight: bold">
+          R.Unit Price
+        </div>
+        <div class="col-6">
+          {{orderDetail.poUnitPrice | number : '1.2-2'}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6" style="font-weight: bold">
+          N.Unit Price
+        </div>
+        <div class="col-6">
+          {{orderDetail.soUnitPrice | number : '1.2-2'}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6" style="font-weight: bold">
+          R.Quantity
+        </div>
+        <div class="col-6">
+          {{orderDetail.poQuantity}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6" style="font-weight: bold">
+          N.Quantity
+        </div>
+        <div class="col-6">
+          {{orderDetail.soQuantity}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6" style="font-weight: bold">
+          Total
+        </div>
+        <div class="col-6">
+          {{(orderDetail.poUnitPrice * orderDetail.poQuantity) | number : '1.2-2'}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6" style="font-weight: bold">
+          Status
+        </div>
+        <div class="col-6" style="font-weight: bold">
+          <span style="text-align: center" *ngIf="orderDetail.status==='Complete'">
+            Accepted
+          </span>
+          <span style="text-align: center" *ngIf="orderDetail.status==='Incomplete'">
+            Not Accepted
+          </span>
+        </div>
+      </div>
+      <div class="row" style="margin-top: 10px">
+        <div class="col-12" style="text-align: right">
+          <button class="btn btn-danger" (click)="removeItem(itemObj.id,i)">Remove</button>
+        </div>
+      </div>
     </div>
-    <table class="table" width="100%" border="1px solid black">
-      <thead class="thead-dark">
-      <th>Item No</th>
-      <th>Item Name</th>
-      <th>Item Type</th>
-      <th>R.Unit Price</th>
-      <th>N.Unit Price</th>
-      <th>R.Quantity</th>
-      <th>N.Quantity</th>
-      <th>Total</th>
-      <th style="text-align: center">Status</th>
-      </thead>
-      <tbody>
-      <tr *ngFor="let orderDetail of orderDetails;let i = index">
-        <td>{{orderDetail.id}}</td>
-        <td>{{orderDetail.material.itemName}}</td>
-        <td>{{orderDetail.material.itemType}}</td>
-        <td>{{orderDetail.poUnitPrice | number : '1.2-2'}}</td>
-        <td>{{orderDetail.soUnitPrice | number : '1.2-2'}}</td>
-        <td>{{orderDetail.poQuantity}}</td>
-        <td>{{orderDetail.soQuantity}}</td>
-        <td>{{(orderDetail.poUnitPrice * orderDetail.poQuantity) | number : '1.2-2'}}</td>
-        <td style="text-align: center" *ngIf="orderDetail.status==='Complete'">
-          <i class="fa fa-check"></i>
-        </td>
-        <td style="text-align: center" *ngIf="orderDetail.status==='Incomplete'">
-          <i class="fa fa-times"></i>
-        </td>
-      </tr>
-      <!--<tr *ngFor="let pump of orders;let i = index">-->
-      <!--<td>{{i+1}}</td>-->
-      <!--<td>{{pump.pumpedAtFormatted}}</td>-->
-      <!--<td>{{pump.fuelType.name}}</td>-->
-      <!--<td>{{pump.fuelPumped}}L {{pump.fullTanked?'/ Full':''}}</td>-->
-      <!--<td>{{pump.fuelStation.name}}</td>-->
-      <!--</tr>-->
-      </tbody>
-    </table>
   </div>
 
   <div style="text-align: right">
@@ -86,9 +133,9 @@
     </div>
   </div>
 
-  <!--<div style="margin-top: 20px;text-align: right">-->
-  <!--<button class="btn btn-success" style="margin-right: 10px" (click)="editPR()">Edit PR</button>-->
-  <!--</div>-->
+  <div style="margin-top: 20px;text-align: right">
+    <button class="btn btn-success" style="margin-right: 10px" (click)="removePO()">Delete PR</button>
+  </div>
 
 </div>
 

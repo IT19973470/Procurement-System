@@ -39,6 +39,14 @@ export class SiteManagerService {
     return this.http.delete<any>(environment.backend_url + '/site_manager/removeItem/' + id);
   }
 
+  rejectPurchaseOrder(id): Observable<any> {
+    return this.http.delete<any>(environment.backend_url + '/site_manager/rejectPurchaseOrder/' + id);
+  }
+
+  editInfo(order): Observable<any> {
+    return this.http.post<any>(environment.backend_url + '/site_manager/editInfo', order);
+  }
+
   newOrder() {
     return {
       id: '',

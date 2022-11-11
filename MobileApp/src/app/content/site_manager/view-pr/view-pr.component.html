@@ -22,10 +22,10 @@
       <th style="text-align: center">Status</th>
       </thead>
       <tbody>
-      <tr *ngFor="let order of orders;let i = index">
+      <tr *ngFor="let order of orders;let i = index" (click)="viewPRDetails(order)">
         <td>{{order.id}}</td>
-        <td>{{order.supplier.name}}</td>
-        <td>{{order.supplier.status}}</td>
+        <td>{{order.supplier==null?'N/A':order.supplier.name}}</td>
+        <td style="text-align: center">{{order.poStatus}}</td>
       </tr>
       </tbody>
     </table>

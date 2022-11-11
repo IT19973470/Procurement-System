@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {SiteManagerService} from "../site-manager.service";
 import {ProcumentOfficerService} from "../procument-officer.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-view-pr-details',
@@ -19,7 +20,7 @@ export class ViewPrDetailsComponent implements OnInit {
     foundLetter: ''
   };
 
-  constructor(private siteManagerService: SiteManagerService, private procumentOfficerService: ProcumentOfficerService) {
+  constructor(private siteManagerService: SiteManagerService, private procumentOfficerService: ProcumentOfficerService, private router: Router) {
     this.item = this.procumentOfficerService.newItem()
   }
 
@@ -83,7 +84,10 @@ export class ViewPrDetailsComponent implements OnInit {
     this.isTrueOrFalseDetails(false)
   }
 
-  editPR() {
+  removePO() {
+    this.procumentOfficerService.removePurchaseOrder(this.order.id).subscribe(() => {
+      this.router.navigate(['/view_pr'])
+    })
   }
 
 }
