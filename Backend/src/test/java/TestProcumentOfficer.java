@@ -1,13 +1,10 @@
 import lk.backend.entity.AppUser;
 import lk.backend.entity.PurchaseOrder;
-import lk.backend.entity.PurchaseOrderDetail;
 import lk.backend.service.factory.OrderFactory;
-import lk.backend.service.factory.OrderService;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.HashSet;
-import java.util.Set;
 
 public class TestProcumentOfficer {
 

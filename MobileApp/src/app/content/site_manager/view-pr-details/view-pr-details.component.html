@@ -17,7 +17,15 @@
   </div>
 </div>
 
-<div class="row" style="border-top: 1px solid #aeaeae;margin: 10px">
+<div class="row" style="border-top: 1px solid #aeaeae;margin: 10px" id="print-section">
+  <div style="margin-top: 10px">
+    <span style="font-weight: bold">
+      PO Reference :
+    </span>
+    <span>
+      {{order.id}}
+    </span>
+  </div>
   <div class="col-12">
 
     <div style="text-align: right">
@@ -122,19 +130,20 @@
   <div style="margin-top: 20px">
     <div style="font-weight: bold">Notes</div>
     <div>
-      <textarea readonly class="form-control" cols="30" rows="4" [(ngModel)]="order.deliverNote"></textarea>
+      <textarea readonly class="form-control" cols="30" rows="4">{{order.deliverNote}}</textarea>
     </div>
   </div>
 
   <div style="margin-top: 20px">
     <div style="font-weight: bold">Handling Instructions</div>
     <div>
-      <textarea readonly class="form-control" cols="30" rows="4" [(ngModel)]="order.handlingInstruction"></textarea>
+      <textarea readonly class="form-control" cols="30" rows="4">{{order.handlingInstruction}}</textarea>
     </div>
   </div>
 
   <div style="margin-top: 20px;text-align: right">
-    <button class="btn btn-success" style="margin-right: 10px" (click)="removePO()">Delete PR</button>
+    <button class="btn btn-danger" style="margin-right: 10px" (click)="removePO()">Delete PR</button>
+    <button class="btn btn-success" style="margin-right: 10px" (click)="print()">Print PR</button>
   </div>
 
 </div>
@@ -144,38 +153,38 @@
   <div (click)="isTrueOrFalseDetails(false)"></div>
   <div>
     <div class="selectChild" id="imageActivitySize"
-         style="max-height: calc(100vh - 60px);overflow-y: hidden;margin-left: 60px;margin-right: 10px;margin-top: 100px;">
+         style="max-height: calc(100vh - 60px);overflow-y: hidden;margin-top: 50px;">
       <div style="position: absolute;z-index: 99;right: 10px;top: 10px;">
         <i class="fas fa-times" style="cursor: pointer" (click)="isTrueOrFalseDetails(false)"></i>
       </div>
 
       <div class="row" style="padding: 40px">
-        <div class="col-6">
+        <div class="col-12">
           <span>Item No</span>
           <span style="display: flex">
             <input type="text" class="form-control" [(ngModel)]="item.id">
             <i class="fa fa-search" style="padding-top: 10px;padding-left: 10px" (click)="getItemById()"></i>
           </span>
         </div>
-        <div class="col-6">
+        <div class="col-12">
           <span>Item Name</span>
           <span>
             <input type="text" class="form-control" [(ngModel)]="item.itemName">
           </span>
         </div>
-        <div class="col-6">
+        <div class="col-12">
           <span>Item Type</span>
           <span>
             <input type="text" class="form-control" [(ngModel)]="item.itemType">
           </span>
         </div>
-        <div class="col-6">
+        <div class="col-12">
           <span>Quantity</span>
           <span>
             <input type="number" class="form-control" [(ngModel)]="item.poQuantity">
           </span>
         </div>
-        <div class="col-6">
+        <div class="col-12">
           <span>Unit Price</span>
           <span>
             <input type="number" class="form-control" [(ngModel)]="item.poUnitPrice">

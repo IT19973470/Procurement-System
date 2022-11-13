@@ -32,32 +32,11 @@ public class SupplierServiceImpl implements SupplierService {
     @Override
     public boolean acceptOrder(String orderId) {
         return orderFactory.getOrderObj(CommonConstants.PURCHASE_ORDER).acceptOrder(purchaseOrderRepository, orderId);
-//        Optional<PurchaseOrder> orderOptional = purchaseOrderRepository.findById(orderId);
-//        if (orderOptional.isPresent()) {
-//            PurchaseOrder purchaseOrder = orderOptional.get();
-//            purchaseOrder.setPoAccepted(true);
-//            purchaseOrderRepository.save(purchaseOrder);
-//            return true;
-//        }
-//        return false;
     }
 
     @Override
     public PurchaseOrder finalizePurchaseOrder(PurchaseOrder purchaseOrder, String id, int rating) {
         return orderFactory.getOrderObj(CommonConstants.PURCHASE_ORDER).finalizePurchaseOrder(purchaseOrderRepository, purchaseOrder, id);
-//        Optional<PurchaseOrder> orderOptional = purchaseOrderRepository.findById(id);
-//        if (orderOptional.isPresent()) {
-//            PurchaseOrder purchaseOrderObj = orderOptional.get();
-//            purchaseOrderObj.setPurchaseOrderDetails(purchaseOrder.getPurchaseOrderDetails());
-//            for (PurchaseOrderDetail purchaseOrderDetaiObj : purchaseOrderObj.getPurchaseOrderDetails()) {
-//                purchaseOrderDetaiObj.setPurchaseOrder(purchaseOrderObj);
-//            }
-//            purchaseOrderObj.setPoFinalized(true);
-//            purchaseOrderObj.setIdFormatted(purchaseOrderObj.getFormattedId());
-//            purchaseOrderRepository.save(purchaseOrderObj);
-//            return new PurchaseOrder(purchaseOrderObj);
-//        }
-//        return null;
     }
 
     @Override

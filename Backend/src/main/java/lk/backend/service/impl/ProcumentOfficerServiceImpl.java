@@ -28,29 +28,16 @@ public class ProcumentOfficerServiceImpl implements ProcumentOfficerService {
     @Override
     public boolean removePR(String itemId) {
         return orderFactory.getOrderObj(CommonConstants.PURCHASE_ORDER).removePR(purchaseOrderDetailRepository, itemId);
-//        purchaseOrderDetailRepository.deleteById(itemId);
-//        return true;
     }
 
     @Override
     public PurchaseOrderDetail updatePR(PurchaseOrderDetail purchaseOrderDetail) {
         return orderFactory.getOrderObj(CommonConstants.PURCHASE_ORDER).updatePR(purchaseOrderDetailRepository, purchaseOrderDetail);
-//        purchaseOrderDetail.setStatus("Incomplete");
-//        purchaseOrderDetail = purchaseOrderDetailRepository.save(purchaseOrderDetail);
-//        return new PurchaseOrderDetail(purchaseOrderDetail);
     }
 
     @Override
     public boolean approveOrder(String orderId) {
         return orderFactory.getOrderObj(CommonConstants.PURCHASE_ORDER).approveOrder(purchaseOrderRepository, orderId);
-//        Optional<PurchaseOrder> orderOptional = purchaseOrderRepository.findById(orderId);
-//        if (orderOptional.isPresent()) {
-//            PurchaseOrder purchaseOrder = orderOptional.get();
-//            purchaseOrder.setPoApproved(true);
-//            purchaseOrderRepository.save(purchaseOrder);
-//            return true;
-//        }
-//        return false;
     }
 
     @Override

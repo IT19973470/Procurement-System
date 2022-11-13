@@ -42,7 +42,6 @@ public class WarehouseController {
 
     @GetMapping(value = "/finalizeSupplierOrder/{warehouseId}/{rating}")
     public ResponseEntity finalizeSupplierOrder(@PathVariable String warehouseId, @PathVariable int rating) {
-//        return ResponseEntity.ok(warehouseService.finalizeSupplierOrder(purchaseOrder,warehouseId));
         finalizeOrderCommand.commandSupplierOrder = new FinalizeSupplierOrder(warehouseService);
         return ResponseEntity.ok(finalizeOrderCommand.commandSupplierOrder.finalizeOrder(null, warehouseId, rating));
     }

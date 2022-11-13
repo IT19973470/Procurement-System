@@ -44,44 +44,21 @@ public class SiteManagerServiceImpl implements SiteManagerService {
     @Override
     public PurchaseOrder addPR(PurchaseOrder purchaseOrder) {
         return orderFactory.getOrderObj(CommonConstants.PURCHASE_ORDER).addPR(purchaseOrderRepository, purchaseOrder);
-//        purchaseOrder.setId(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddhhmmss")));
-//        for (PurchaseOrderDetail purchaseOrderDetail : purchaseOrder.getPurchaseOrderDetails()) {
-//            purchaseOrderDetail.setId("PD" + purchaseOrder.getId() + purchaseOrderDetail.getId());
-//            purchaseOrderDetail.setStatus("Incomplete");
-//            purchaseOrderDetail.setPurchaseOrder(purchaseOrder);
-//        }
-//        purchaseOrderRepository.save(purchaseOrder);
-//        return new PurchaseOrder(purchaseOrder);
     }
 
     @Override
     public List<PurchaseOrder> getPRs() {
         return orderFactory.getOrderObj(CommonConstants.PURCHASE_ORDER).getPRs(purchaseOrderRepository);
-//        List<PurchaseOrder> purchaseOrderList = purchaseOrderRepository.findAll();
-//        List<PurchaseOrder> purchaseOrderListDTOs = new ArrayList<>();
-//        for (PurchaseOrder purchaseOrder : purchaseOrderList) {
-//            PurchaseOrder purchaseOrderObj = new PurchaseOrder(purchaseOrder);
-//            purchaseOrderObj.setSupplier(purchaseOrder.getSupplier());
-//            List<PurchaseOrderDetail> purchaseOrderDetails = new ArrayList<>();
-//            for (PurchaseOrderDetail purchaseOrderDetail : purchaseOrder.getPurchaseOrderDetails()) {
-//                purchaseOrderDetails.add(new PurchaseOrderDetail(purchaseOrderDetail));
-//            }
-//            purchaseOrderObj.setPurchaseOrderDetailList(purchaseOrderDetails);
-//            purchaseOrderListDTOs.add(purchaseOrderObj);
-//        }
-//        return purchaseOrderListDTOs;
     }
 
     @Override
     public boolean removeItem(String id) {
         return orderFactory.getOrderObj(CommonConstants.PURCHASE_ORDER).removeItem(purchaseOrderDetailRepository, id);
-//        purchaseOrderDetailRepository.deleteById(id);
-//        return true;
     }
 
     @Override
     public boolean removeMaterial(String id) {
-        materialRepository.findById(id);
+        materialRepository.deleteById(id);
         return true;
     }
 

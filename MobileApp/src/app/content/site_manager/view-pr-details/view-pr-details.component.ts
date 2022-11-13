@@ -90,4 +90,34 @@ export class ViewPrDetailsComponent implements OnInit {
     })
   }
 
+  print() {
+    // let printContents, popupWin;
+    // printContents = document.getElementById('print-section').innerHTML;
+    // popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
+    // popupWin.document.open();
+    // popupWin.document.write(`
+    //   <html>
+    //     <head>
+    //       <title>Print tab</title>
+    //       <!--<style>-->
+    //       <!--//........Customized style.......-->
+    //       <!--</style>-->
+    //     </head>
+    // <body onload="window.print();window.close()">${printContents}</body>
+    //   </html>`
+    // );
+    var mywindow = window.open('', 'PRINT', 'height=400,width=600');
+
+    mywindow.document.write('<html><head><title>' + document.title  + '</title>');
+    mywindow.document.write('</head><body>');
+    mywindow.document.write(document.getElementById('print-section').innerHTML);
+    mywindow.document.write('</body></html>');
+
+    mywindow.document.close(); // necessary for IE >= 10
+    mywindow.focus(); // necessary for IE >= 10*/
+
+    // mywindow.print();
+    // mywindow.close();
+  }
+
 }
